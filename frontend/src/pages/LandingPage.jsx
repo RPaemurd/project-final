@@ -249,8 +249,8 @@ const LandingPage = () => (
       </Hero>
 
       <Stats>
-        <StatPill><strong>Medicinsk vägledning</strong><StatSep />Community & stöd</StatPill>
-        <StatPill><strong>Gratis</strong><StatSep />Alltid tillgänglig</StatPill>
+        <StatPill><strong>Medicinsk vägledning</strong><StatSep />Gratis</StatPill>
+        <StatPill><strong>Community & stöd</strong><StatSep />Alltid tillgänglig</StatPill>
         <StatPill><strong>Snabb hjälp</strong><StatSep />Symtomkoll på under 60 sek</StatPill>
       </Stats>
 
@@ -265,7 +265,7 @@ const LandingPage = () => (
   </Frame>
 );
 
-// ─── Inline SVG icons ─────────────────────────────────────────
+// Inline SVG icons 
 const CheckIcon = () => (
   <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
     <circle cx="7" cy="7" r="6" stroke="currentColor" strokeWidth="1.5"/>

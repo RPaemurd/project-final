@@ -27,34 +27,47 @@ export const Frame = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
+
+  /* mobil: ingen padding, kortet fyller hela skärmen */
+  padding: 0;
   background: ${theme.colors.dark};
+
+  @media (min-width: 768px) {
+    padding: 2rem;
+  }
 `;
 
 // ─── Main card ────────────────────────────────────────────────
 export const Card = styled.div`
   width: 100%;
-  max-width: ${({ maxWidth }) => maxWidth || '1100px'};
-  min-height: ${({ minHeight }) => minHeight || '620px'};
-  border-radius: ${theme.radius.xl};
-  overflow: hidden;
+  min-height: 100vh;
   position: relative;
   background: ${theme.gradients.card};
-  box-shadow: ${theme.shadow.card}, inset 0 1px 0 rgba(255,255,255,0.15);
   display: flex;
   flex-direction: column;
 
-  /* dark overlay for text readability */
+  /* mobil: inga rundade hörn, fyller hela skärmen */
+  border-radius: 0;
+  box-shadow: none;
+
+  @media (min-width: 768px) {
+    max-width: ${({ maxWidth }) => maxWidth || '1100px'};
+    min-height: ${({ minHeight }) => minHeight || '620px'};
+    border-radius: 24px;
+    box-shadow: ${theme.shadow.card}, inset 0 1px 0 rgba(255,255,255,0.15);
+  }
+
+  /* dark overlay */
   &::after {
     content: '';
     position: absolute;
     inset: 0;
-    background: ${theme.overlay};
+    background: rgba(8, 35, 40, 0.45);
     pointer-events: none;
     z-index: 2;
   }
 
-  /* vertical stripe texture */
+  /* stripe texture */
   &::before {
     content: '';
     position: absolute;
@@ -69,38 +82,50 @@ export const Card = styled.div`
   }
 `;
 
-// ─── Corner labels (decorative) ───────────────────────────────
+// ─── Corner labels — bara synliga på desktop ──────────────────
 export const CornerLabel = styled.span`
-  position: absolute;
-  color: rgba(255,255,255,0.5);
-  font-size: 0.62rem;
-  letter-spacing: 0.05em;
-  z-index: 15;
-  ${({ pos }) => ({
-    'tl': 'top: 1rem; left: 1.2rem;',
-    'tr': 'top: 1rem; right: 1.2rem;',
-    'bl': 'bottom: 1rem; left: 1.2rem;',
-    'br': 'bottom: 1rem; right: 1.2rem;',
-  }[pos])}
+  display: none;
+
+  @media (min-width: 768px) {
+    display: block;
+    position: absolute;
+    color: rgba(255,255,255,0.5);
+    font-size: 0.62rem;
+    letter-spacing: 0.05em;
+    z-index: 15;
+
+    ${({ pos }) => ({
+      'tl': 'top: 1rem; left: 1.2rem;',
+      'tr': 'top: 1rem; right: 1.2rem;',
+      'bl': 'bottom: 1rem; left: 1.2rem;',
+      'br': 'bottom: 1rem; right: 1.2rem;',
+    }[pos])}
+  }
 `;
 
-// ─── Shared button styles ─────────────────────────────────────
+// ─── Shared buttons ───────────────────────────────────────────
 export const BtnPrimary = styled.button`
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
   background: rgba(255,255,255,0.92);
   color: ${theme.colors.tealDeep};
   border: none;
   border-radius: ${theme.radius.pill};
-  padding: 0.85rem 2rem;
-  font-size: 0.88rem;
+  padding: 0.9rem 2rem;
+  font-size: 0.9rem;
   font-weight: 500;
   cursor: pointer;
   letter-spacing: 0.01em;
   box-shadow: ${theme.shadow.btn};
   transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
   text-decoration: none;
+  width: 100%;
+
+  @media (min-width: 480px) {
+    width: auto;
+  }
 
   &:hover {
     background: #fff;
@@ -110,16 +135,25 @@ export const BtnPrimary = styled.button`
 `;
 
 export const BtnGhost = styled.button`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
   background: transparent;
   border: 1px solid rgba(255,255,255,0.25);
   border-radius: ${theme.radius.pill};
-  padding: 0.85rem 1.6rem;
-  font-size: 0.85rem;
+  padding: 0.9rem 2rem;
+  font-size: 0.88rem;
   font-weight: 400;
   color: rgba(255,255,255,0.8);
   cursor: pointer;
   letter-spacing: 0.01em;
   transition: border-color 0.2s, color 0.2s;
+  width: 100%;
+
+  @media (min-width: 480px) {
+    width: auto;
+  }
 
   &:hover {
     border-color: rgba(255,255,255,0.5);
