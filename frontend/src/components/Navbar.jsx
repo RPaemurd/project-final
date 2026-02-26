@@ -165,6 +165,24 @@ const MobileCta = styled.a`
   &:hover { background: #fff; }
 `;
 
+// Tillbaka-knapp i app-varianten — tar användaren till startsidan
+const BackBtn = styled.a`
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.82rem;
+  font-weight: 400;
+  color: rgba(255,255,255,0.75);
+  text-decoration: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 100px;
+  border: 1px solid rgba(255,255,255,0.2);
+  transition: color 0.2s, border-color 0.2s;
+
+  &:hover { color: #fff; border-color: rgba(255,255,255,0.4); }
+  &:active { transform: scale(0.97); }
+`;
+
 // ─── User pill (app variant) ──────────────────────────────────
 const UserPill = styled.div`
   display: flex;
@@ -196,6 +214,9 @@ const Avatar = styled.div`
 const Navbar = ({ variant = 'default', user = null, logoHref = '/' }) => {
   const [menuOpen, setMenuOpen] = useState(false);
 
+  const toggleMenu = () => setMenuOpen(prev => !prev);
+  const closeMenu  = () => setMenuOpen(false);
+
   return (
     <>
       <Nav>
@@ -212,6 +233,7 @@ const Navbar = ({ variant = 'default', user = null, logoHref = '/' }) => {
           <>
             <NavLinks>
               <li><NavLink href="#">Hem</NavLink></li>
+              <li><NavLink href="/medicin">Medicinkoll</NavLink></li>
               <li><NavLink href="#">Om oss</NavLink></li>
               <li><NavLink href="#">Hur det fungerar</NavLink></li>
               <li><NavLink href="#">FAQ</NavLink></li>
@@ -221,16 +243,25 @@ const Navbar = ({ variant = 'default', user = null, logoHref = '/' }) => {
         )}
 
         {variant === 'app' && user && (
+          <> 
+           <BackBtn href="/">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M10 3L5 8l5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+              Tillbaka
+            </BackBtn>
           <UserPill>
             <Avatar>{user.initials}</Avatar>
             {user.name}
           </UserPill>
+          </>
         )}
       </Nav>
 
       {/* Hamburgare på mobil — outside Nav to avoid its stacking context */}
       {variant === 'default' && (
-        <HamburgerBtn onClick={() => setMenuOpen(o => !o)} aria-label="Meny">
+        <HamburgerBtn onClick={toggleMenu}
+          aria-label={menuOpen ? 'Stäng meny' : 'Öppna meny'}>
           <HamburgerLine $open={menuOpen} />
           <HamburgerLine $open={menuOpen} />
           <HamburgerLine $open={menuOpen} />
@@ -244,6 +275,7 @@ const Navbar = ({ variant = 'default', user = null, logoHref = '/' }) => {
           <MobileLink href="#" onClick={() => setMenuOpen(false)}>Om oss</MobileLink>
           <MobileLink href="#" onClick={() => setMenuOpen(false)}>Hur det fungerar</MobileLink>
           <MobileLink href="#" onClick={() => setMenuOpen(false)}>FAQ</MobileLink>
+          <MobileLink href="/medicin" onClick={() => setMenuOpen(false)}>Medicinkoll</MobileLink>
           <MobileCta href="/login" onClick={() => setMenuOpen(false)}>Kom igång gratis</MobileCta>
         </MobileMenu>
       )}
