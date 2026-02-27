@@ -1,12 +1,16 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
+import dotenv from 'dotenv';
+
+dotenv.config();
+
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/final-project";
 mongoose.connect(mongoUrl);
 mongoose.Promise = Promise;
 
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 8081;
 const app = express();
 
 app.use(cors());
@@ -20,3 +24,10 @@ app.get("/", (req, res) => {
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
+mongoose.connect(mongoUrl)
+  .then(() => {
+    console.log("✅ Succé! Vi har kontakt med MongoDB Atlas.");
+  })
+  .catch((err) => {
+    console.error("❌ Aj då, kunde inte ansluta till databasen:", err);
+  });

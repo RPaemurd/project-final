@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import MedicinPage      from './pages/MedicinPage.jsx';
 
+const API_URL = "https://project-final-vq1d.onrender.com";
 
 export const App = () => {
 
