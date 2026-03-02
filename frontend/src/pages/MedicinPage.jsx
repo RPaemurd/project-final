@@ -1,15 +1,3 @@
-// ─────────────────────────────────────────────────────────────────────────────
-// MedicinPage.jsx — MOBILE FIRST
-//
-// Alla styled-components är skrivna mobile-first:
-//   - Basstilarna (utanför @media) gäller för mobil
-//   - @media (min-width: Xpx) lägger till eller skriver över för större skärmar
-//
-// Brytpunkter som används:
-//   480px  = stora mobiltelefoner (iPhone Plus, Pixel XL)
-//   768px  = surfplatta och desktop
-// ─────────────────────────────────────────────────────────────────────────────
-
 import React, { useState } from 'react';
 import styled, { keyframes, css } from 'styled-components';
 
