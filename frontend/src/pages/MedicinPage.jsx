@@ -6,10 +6,10 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 // Frame = yttersta wrapper, Card = gradient-kortet,
-// CornerLabel = dekorativa hörn-texter (bara desktop), fadeUp = animation
 import { Frame, Card, CornerLabel, fadeUp } from '../components/Layout.jsx';
 import Navbar from '../components/Navbar.jsx';
 import { theme } from '../styles/theme';
+import BottomNav from "../components/BottomNav.jsx"
 
 
 // ─── ANIMATIONER ─────────────────────────────────────────────────────────────
@@ -321,7 +321,8 @@ const TomorrowTime = styled.div`
 const AddBtnWrap = styled.div`
   /* MOBIL: full bredd */
   position: fixed;
-  bottom: 2.5rem; left: 0; right: 0;
+  bottom: 5rem;
+  left: 0; right: 0;
   z-index: 50;
   padding: 1rem 1.4rem 1.6rem;
 
@@ -968,7 +969,7 @@ const MedicinPage = () => {
           </ConfirmSheet>
         </Backdrop>
       )}
-
+      <BottomNav active="medicin" />
     </Frame>
   );
 };

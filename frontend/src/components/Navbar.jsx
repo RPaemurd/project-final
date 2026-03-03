@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { theme } from '../styles/theme';
+import { useLocation } from 'react-router-dom';
 
 // ─── Styles ───────────────────────────────────────────────────
 const Nav = styled.nav`
@@ -271,9 +272,9 @@ const Navbar = ({ variant = 'default', user = null, logoHref = '/' }) => {
       {/* Mobile drawer */}
       {variant === 'default' && (
         <MobileMenu $open={menuOpen}>
-          <MobileLink href="#" onClick={() => setMenuOpen(false)}>Hem</MobileLink>
-          <MobileLink href="#" onClick={() => setMenuOpen(false)}>Om oss</MobileLink>
-          <MobileLink href="#" onClick={() => setMenuOpen(false)}>Hur det fungerar</MobileLink>
+          <MobileLink href="/" onClick={() => setMenuOpen(false)}>Hem</MobileLink>
+          <MobileLink href="/oss" onClick={() => setMenuOpen(false)}>Om oss</MobileLink>
+          <MobileLink href="hurdetfungerar" onClick={() => setMenuOpen(false)}>Hur det fungerar</MobileLink>
           <MobileLink href="/faq" onClick={() => setMenuOpen(false)}>FAQ</MobileLink>
           <MobileLink href="/medicin" onClick={() => setMenuOpen(false)}>Medicinkoll</MobileLink>
           <MobileCta href="/login" onClick={() => setMenuOpen(false)}>Kom igång gratis</MobileCta>
