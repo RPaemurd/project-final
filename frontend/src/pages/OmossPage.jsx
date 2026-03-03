@@ -424,7 +424,7 @@ const OmOssPage = () => (
               <TeamName>Medicinsk rådgivare</TeamName>
              {/*  <TeamRole>Legitimerad sjuksköterska</TeamRole> */}
             </TeamInfo>
-          </TeamCard>1
+          </TeamCard>
           <TeamCard $delay="0.16s">
             <TeamAvatar $color="rgba(255,138,125,0.15)">UX</TeamAvatar>
             <TeamInfo>
