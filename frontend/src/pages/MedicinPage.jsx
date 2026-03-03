@@ -506,7 +506,6 @@ const FieldLabel = styled.label`
 `;
 
 // Textfält och tidsfält i formuläret.
-// VIKTIGT: font-size 1rem (= 16px) på mobil förhindrar att iOS zooomar in
 // automatiskt vid fokus — under 16px triggas auto-zoom.
 // -webkit-appearance: none tar bort iOS standardstilar (border, shadow etc.)
 const FieldInput = styled.input`
@@ -798,7 +797,7 @@ const MedicinPage = () => {
         <CornerLabel pos="tl">Medicinlåda</CornerLabel>
         {/* <CornerLabel pos="tr">Stoppa Proppen</CornerLabel> */}
 
-        <Navbar variant="app" user={{ name: 'Anna L.', initials: 'A' }} logoHref="/" />
+        <Navbar variant="default" user={{ name: 'Anna L.', initials: 'A' }} logoHref="/" />
 
         <ScrollArea>
 

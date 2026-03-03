@@ -232,11 +232,11 @@ const Navbar = ({ variant = 'default', user = null, logoHref = '/' }) => {
         {variant === 'default' && (
           <>
             <NavLinks>
-              <li><NavLink href="#">Hem</NavLink></li>
+              <li><NavLink href="/">Hem</NavLink></li>
               <li><NavLink href="/medicin">Medicinkoll</NavLink></li>
-              <li><NavLink href="#">Om oss</NavLink></li>
+              <li><NavLink href="/oss">Om oss</NavLink></li>
               <li><NavLink href="#">Hur det fungerar</NavLink></li>
-              <li><NavLink href="#">FAQ</NavLink></li>
+              <li><NavLink href="/faq">FAQ</NavLink></li>
             </NavLinks>
             <NavCta href="/login">Kom igång</NavCta>
           </>
@@ -274,7 +274,7 @@ const Navbar = ({ variant = 'default', user = null, logoHref = '/' }) => {
           <MobileLink href="#" onClick={() => setMenuOpen(false)}>Hem</MobileLink>
           <MobileLink href="#" onClick={() => setMenuOpen(false)}>Om oss</MobileLink>
           <MobileLink href="#" onClick={() => setMenuOpen(false)}>Hur det fungerar</MobileLink>
-          <MobileLink href="#" onClick={() => setMenuOpen(false)}>FAQ</MobileLink>
+          <MobileLink href="/faq" onClick={() => setMenuOpen(false)}>FAQ</MobileLink>
           <MobileLink href="/medicin" onClick={() => setMenuOpen(false)}>Medicinkoll</MobileLink>
           <MobileCta href="/login" onClick={() => setMenuOpen(false)}>Kom igång gratis</MobileCta>
         </MobileMenu>
