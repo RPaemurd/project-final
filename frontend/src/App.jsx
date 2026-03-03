@@ -4,9 +4,8 @@ import GlobalStyles from "./styles/Globalstyles";
 import { theme } from "./styles/theme";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
-import MedicinPage      from './pages/MedicinPage.jsx';
-
-const API_URL = "https://project-final-vq1d.onrender.com";
+import MedicinPage from "./pages/MedicinPage";
+import FaqPage from "./pages/FaqPage";
 
 export const App = () => {
 
@@ -18,6 +17,8 @@ export const App = () => {
           <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/medicin" element={<MedicinPage />} />
+          <Route path="/faq" element={<FaqPage />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
       </BrowserRouter>
     </ThemeProvider>

@@ -796,7 +796,7 @@ const MedicinPage = () => {
     <Frame>
       <Card>
         <CornerLabel pos="tl">Medicinlåda</CornerLabel>
-        <CornerLabel pos="tr">Stoppa Proppen</CornerLabel>
+        {/* <CornerLabel pos="tr">Stoppa Proppen</CornerLabel> */}
 
         <Navbar variant="app" user={{ name: 'Anna L.', initials: 'A' }} logoHref="/" />
 
