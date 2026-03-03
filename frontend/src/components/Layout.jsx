@@ -38,7 +38,7 @@ export const Frame = styled.div`
 `;
 
 // ─── Main card ────────────────────────────────────────────────
-export const Card = styled.div`
+export const Card = styled.main`
   width: 100%;
   min-height: 100vh;
   position: relative;
