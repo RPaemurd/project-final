@@ -22,6 +22,7 @@ const Hero = styled.div`
   align-items: center;
   justify-content: center;
   text-align: center;
+  margin-top: 2.5rem;
   padding: 1.8rem;
   gap: 1rem;
 
