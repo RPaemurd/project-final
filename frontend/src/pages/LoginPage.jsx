@@ -10,6 +10,8 @@ const SplitCard = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
+  border-radius: 24px;        
+  overflow: hidden;
 
   /* mobil: ren gradient, inget split */
   background: linear-gradient(160deg, #1a6b76 0%, #0d4a52 100%);

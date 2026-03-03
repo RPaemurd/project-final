@@ -227,7 +227,7 @@ const FAQ_DATA = [
       },
       {
         q: 'Kostar det något att använda appen?',
-        a: 'Nej, Stoppa Proppen är helt gratis att använda. Vi tar inga betalt för grundfunktionerna och visar inga annonser.',
+        a: 'Nej, Stoppa Proppen är helt gratis att använda. Vi tar inget betalt för grundfunktionerna och visar inga annonser.',
       },
       {
         q: 'Är appen godkänd av sjukvården?',
