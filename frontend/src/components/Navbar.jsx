@@ -235,7 +235,7 @@ const Navbar = ({ variant = 'default', user = null, logoHref = '/' }) => {
               <li><NavLink href="/">Hem</NavLink></li>
               <li><NavLink href="/medicin">Medicinkoll</NavLink></li>
               <li><NavLink href="/oss">Om oss</NavLink></li>
-              <li><NavLink href="#">Hur det fungerar</NavLink></li>
+              <li><NavLink href="/hurdetfungerar">Hur det fungerar</NavLink></li>
               <li><NavLink href="/faq">FAQ</NavLink></li>
             </NavLinks>
             <NavCta href="/login">Kom igång</NavCta>

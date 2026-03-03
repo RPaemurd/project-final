@@ -7,6 +7,7 @@ import LoginPage from "./pages/LoginPage";
 import MedicinPage from "./pages/MedicinPage";
 import FaqPage from "./pages/FaqPage";
 import OmOssPage from "./pages/OmossPage";
+import HurdetFungerar from "./pages/Hurdetfungerarpage"
 
 export const App = () => {
 
@@ -19,6 +20,7 @@ export const App = () => {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/medicin" element={<MedicinPage />} />
           <Route path="/oss" element={<OmOssPage />} />
+          <Route path="/hurdetfungerar" element={<HurdetFungerar />} />
           <Route path="/faq" element={<FaqPage />} />
           <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

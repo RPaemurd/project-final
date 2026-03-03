@@ -326,8 +326,8 @@ const LoginPage = ({ onLogin }) => {
   return (
     <Frame>
       <SplitCard>
-        <CornerLabel pos="tl">Inloggning</CornerLabel>
-        <CornerLabel pos="tr">Stoppa Proppen</CornerLabel>
+        {/* <CornerLabel pos="tl">Inloggning</CornerLabel>
+        <CornerLabel pos="tr">Stoppa Proppen</CornerLabel> */}
         <CornerLabel pos="bl">Säker anslutning</CornerLabel>
         <CornerLabel pos="br">v0.1</CornerLabel>
 

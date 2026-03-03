@@ -794,7 +794,7 @@ const MedicinPage = () => {
   return (
     <Frame>
       <Card>
-        <CornerLabel pos="tl">Medicinlåda</CornerLabel>
+        {/* <CornerLabel pos="tl">Medicinlåda</CornerLabel> */}
         {/* <CornerLabel pos="tr">Stoppa Proppen</CornerLabel> */}
 
         <Navbar variant="default" user={{ name: 'Anna L.', initials: 'A' }} logoHref="/" />

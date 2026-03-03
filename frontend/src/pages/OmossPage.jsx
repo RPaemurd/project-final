@@ -298,7 +298,7 @@ const CtaBtn = styled.a`
 const OmOssPage = () => (
   <Frame>
     <Card>
-      <CornerLabel pos="tl">Om oss</CornerLabel>
+     {/*  <CornerLabel pos="tl">Om oss</CornerLabel> */}
       <CornerLabel pos="bl">© 2025</CornerLabel>
 
       <Navbar variant="default" logoHref="/" />
