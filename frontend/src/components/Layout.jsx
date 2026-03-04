@@ -23,7 +23,6 @@ export const growBar = keyframes`
 
 // ─── Page frame ───────────────────────────────────────────────
 export const Frame = styled.div`
-  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -33,6 +32,7 @@ export const Frame = styled.div`
   background: ${theme.colors.dark};
 
   @media (min-width: 768px) {
+    min-height: 100vh;
     padding: 2rem;
   }
 `;
