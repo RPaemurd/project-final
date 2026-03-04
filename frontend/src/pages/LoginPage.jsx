@@ -177,7 +177,7 @@ const MobileLogo = styled.div`
   display: flex;
   align-items: center;
   gap: 0.6rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   z-index: 10;
   position: relative;
 
@@ -191,7 +191,8 @@ const FormHeading = styled.h3`
   font-size: 2rem;
   font-weight: 300;
   color: #fff;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.2rem;
+  
 `;
 
 const FormSubtext = styled.p`
@@ -238,7 +239,7 @@ const ForgotRow = styled.div`
   display: flex;
   justify-content: flex-end;
   margin-top: -0.5rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 `;
 
 const ForgotLink = styled.a`
@@ -270,13 +271,14 @@ const Divider = styled.div`
   display: flex;
   align-items: center;
   gap: 1rem;
-  margin: 1.4rem 0;
+  margin: 0.8rem 0;
 `;
 
 const DividerLine = styled.div`
   flex: 1;
   height: 1px;
   background: rgba(255,255,255,0.15);
+  margin: 0;
 `;
 
 const DividerText = styled.span`
@@ -302,7 +304,7 @@ const GhostBtn = styled.button`
 
 const RegisterLink = styled.p`
   text-align: center;
-  margin-top: 1.5rem;
+  margin-top: 1rem;
   font-size: 0.8rem;
   color: rgba(255,255,255,0.6);
 
@@ -333,6 +335,11 @@ const CornerLabel = styled.span`
   }
 `;
 
+/* const LoginFrame = styled(Frame)`
+  @media (min-width: 768px) {
+    margin-top: 1rem; 
+  }
+`; */
 // ─── Page ─────────────────────────────────────────────────────
 const LoginPage = ({ onLogin }) => {
   const [email, setEmail]       = useState('');
@@ -346,6 +353,7 @@ const LoginPage = ({ onLogin }) => {
 
   return (
     <Frame>
+      
       <SplitCard>
         <CloseBtn href="/" aria-label="Stäng och gå tillbaka">
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -424,6 +432,7 @@ const LoginPage = ({ onLogin }) => {
           </RegisterLink>
         </RightPanel>
       </SplitCard>
+  
     </Frame>
   );
 };
