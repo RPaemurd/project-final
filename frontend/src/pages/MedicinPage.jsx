@@ -312,22 +312,17 @@ const TomorrowTime = styled.div`
 `;
 
 
-// ─── LÄGG TILL-KNAPP (FAST LÄNGST NER) ───────────────────────────────────────
-// Knappen är fixed längst ner hela tiden.
-// Gradienten bakom gör att listan tonas bort naturligt.
-//
-// MOBIL (bas):  sträcker sig full bredd
-// DESKTOP 768+: centreras och begränsas till 640px (samma bredd som innehållet)
+// Knappen är fixed längst ner.
+
 const AddBtnWrap = styled.div`
-  /* MOBIL: full bredd */
   position: fixed;
-  bottom: 7rem;
+  bottom: 4rem;
   left: 0; right: 0;
   z-index: 50;
   padding: 1rem 1.4rem 1.6rem;
 
-  /* DESKTOP 768+: centrera med max-bredd */
   @media (min-width: 768px) {
+    bottom: 6rem;
     max-width: 640px;
     left: 50%;
     transform: translateX(-50%);
