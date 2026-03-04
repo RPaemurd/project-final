@@ -289,8 +289,8 @@ const LandingPage = () => (
       <Stats>
         <StatPill><strong>Medicinsk vägledning</strong><StatSep />Gratis</StatPill>
         <StatPill><strong>Community & stöd</strong><StatSep />Alltid tillgänglig</StatPill>
-{/*         <StatPill><strong>Snabb hjälp</strong><StatSep />Symtomkoll på under 60 sek</StatPill>
- */}      </Stats>
+        <StatPill><strong>Snabb hjälp</strong><StatSep />Symtomkoll på under 60 sek</StatPill>
+    </Stats>
 
       {/* FloatCard döljs på mobil, visas på desktop */}
       <FloatCard>

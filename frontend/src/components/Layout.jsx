@@ -23,6 +23,7 @@ export const growBar = keyframes`
 
 // ─── Page frame ───────────────────────────────────────────────
 export const Frame = styled.div`
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -32,7 +33,6 @@ export const Frame = styled.div`
   background: ${theme.colors.dark};
 
   @media (min-width: 768px) {
-    min-height: 100vh;
     padding: 2rem;
   }
 `;
@@ -40,20 +40,19 @@ export const Frame = styled.div`
 // ─── Main card ────────────────────────────────────────────────
 export const Card = styled.main`
   width: 100%;
- /*  min-height: 100vh; */
+  min-height: 100vh;
   position: relative;
   background: ${theme.gradients.card};
   display: flex;
   flex-direction: column;
 
   /* mobil: inga rundade hörn, fyller hela skärmen */
-  min-height: auto;
   border-radius: 0;
   box-shadow: none;
 
   @media (min-width: 768px) {
-    min-height: ${({ minHeight }) => minHeight || '620px'};
     max-width: ${({ maxWidth }) => maxWidth || '1100px'};
+    min-height: ${({ minHeight }) => minHeight || '620px'};
     border-radius: 24px;
     box-shadow: ${theme.shadow.card}, inset 0 1px 0 rgba(255,255,255,0.15);
   }
