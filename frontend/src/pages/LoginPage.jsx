@@ -151,6 +151,27 @@ const RightPanel = styled.div`
   }
 `;
 
+const CloseBtn = styled.a`
+  position: absolute;
+  top: 1.2rem;
+  right: 1.2rem;
+  z-index: 20;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255,255,255,0.75);
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+
+  &:hover { background: rgba(255,255,255,0.18); color: #fff; }
+  &:active { transform: scale(0.95); }
+`;
+
 // Mobil-logga — bara synlig på mobil ──────────────────────────
 const MobileLogo = styled.div`
   display: flex;
@@ -326,6 +347,12 @@ const LoginPage = ({ onLogin }) => {
   return (
     <Frame>
       <SplitCard>
+        <CloseBtn href="/" aria-label="Stäng och gå tillbaka">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path d="M2 2l10 10M12 2L2 12"
+                stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+          </svg>
+        </CloseBtn>
         {/* <CornerLabel pos="tl">Inloggning</CornerLabel>
         <CornerLabel pos="tr">Stoppa Proppen</CornerLabel> */}
         <CornerLabel pos="bl">Säker anslutning</CornerLabel>

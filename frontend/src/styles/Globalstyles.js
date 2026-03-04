@@ -14,6 +14,12 @@ const GlobalStyles = createGlobalStyle`
     color: #ffffff;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
+
+    font-size: 18px;
+    
+    @media (min-width: 768px) {
+    font-size: 16px;
+  }
   }
 
   a { text-decoration: none; color: inherit; }

@@ -42,7 +42,7 @@ const Badge = styled.div`
   backdrop-filter: blur(10px);
   border-radius: 100px;
   padding: 0.35rem 1rem;
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   font-weight: 500;
   color: rgba(255,255,255,0.9);
   letter-spacing: 0.03em;
