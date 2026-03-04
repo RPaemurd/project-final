@@ -321,7 +321,7 @@ const TomorrowTime = styled.div`
 const AddBtnWrap = styled.div`
   /* MOBIL: full bredd */
   position: fixed;
-  bottom: 5rem;
+  bottom: 7rem;
   left: 0; right: 0;
   z-index: 50;
   padding: 1rem 1.4rem 1.6rem;
