@@ -15,7 +15,7 @@ const GlobalStyles = createGlobalStyle`
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
 
-    font-size: 19px;
+    font-size: 18px;
     
     @media (min-width: 768px) {
     font-size: 17px;
