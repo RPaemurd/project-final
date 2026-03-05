@@ -2,8 +2,8 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from 'dotenv';
-import session from 'express-session';
-
+/* import session from 'express-session';
+ */
 dotenv.config();
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/final-project";
@@ -19,11 +19,11 @@ app.use(express.json());
 // secret: en hemlig nyckel som krypterar sessionen
 // resave: spara inte sessionen om inget ändrats
 // saveUninitialized: spara inte tomma sessioner
-app.use(session({
+/* app.use(session({
   secret: process.env.SESSION_SECRET || 'secret-key',
   resave: false,
   saveUninitialized: false,
-}));
+})); */
 
 app.get("/", (req, res) => {
   res.send("Hello Technigo!");
