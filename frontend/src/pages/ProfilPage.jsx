@@ -70,7 +70,6 @@ const HeroSub = styled.p`
 `;
 
 
-// ─── AVDELARE ─────────────────────────────────────────────────────────────────
 const Divider = styled.div`
   height: 1px;
   background: rgba(255,255,255,0.1);
@@ -78,7 +77,6 @@ const Divider = styled.div`
 `;
 
 
-// ─── SEKTION-ETIKETT ──────────────────────────────────────────────────────────
 const SectionLabel = styled.div`
   font-size: 0.65rem;
   font-weight: 500;
@@ -98,9 +96,6 @@ const SectionLabel = styled.div`
   }
 `;
 
-
-// ─── SNABBLÄNKS-KORT ──────────────────────────────────────────────────────────
-// Två klickbara kort för Medicinlådan och Symtomkollen
 const QuickGrid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -150,8 +145,6 @@ const QuickSub = styled.div`
 `;
 
 
-// ─── KONTO-KORT ───────────────────────────────────────────────────────────────
-// Visar email och kontoinformation
 const AccountCard = styled.div`
   background: rgba(0,0,0,0.22);
   border: 1px solid rgba(255,255,255,0.1);
@@ -181,11 +174,6 @@ const AccountValue = styled.div`
   font-size: 0.92rem;
   color: #fff;
 `;
-
-
-// ─── ÅTGÄRDS-KNAPPAR ──────────────────────────────────────────────────────────
-// Knappar för logga ut, byta lösenord och radera konto
-// Dessa är tomma onClick — du fyller i funktionaliteten!
 
 const ActionList = styled.div`
   display: flex;
@@ -248,8 +236,6 @@ const ActionArrow = styled.div`
 `;
 
 
-// ─── RADERA-KONTO-KNAPP ───────────────────────────────────────────────────────
-// Röd/destructive variant — avskiljs visuellt från resten
 const DeleteBtn = styled.button`
   width: 100%;
   background: rgba(255,80,80,0.06);
@@ -308,12 +294,10 @@ const ProfilPage = () => {
         </Hero>
 
 
-        {/* Snabblänkar */}
         <SectionLabel>Genvägar</SectionLabel>
         <QuickGrid>
           <QuickCard to="/medicin" $delay="0s">
             <QuickIcon>
-              {/* Pill-ikon */}
               <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
                 <path d="M7.5 2.5a4 4 0 0 0-5.657 5.657l8 8a4 4 0 0 0 5.657-5.657l-8-8Z"
                   stroke="currentColor" strokeWidth="1.5"/>
@@ -327,7 +311,6 @@ const ProfilPage = () => {
 
           <QuickCard to="/symptomkoll" $delay="0.08s">
             <QuickIcon>
-              {/* Puls-ikon */}
               <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
                 <path d="M2 9h2.5l2-5L9 14l2-6 1.5 1H16"
                   stroke="currentColor" strokeWidth="1.5"
@@ -343,13 +326,12 @@ const ProfilPage = () => {
         <Divider />
 
 
-        {/* Kontoinformation */}
         <SectionLabel>Kontoinformation</SectionLabel>
         <AccountCard>
           <AccountRow>
             <div>
               <AccountLabel>E-postadress</AccountLabel>
-              {/* TODO: byt ut mot riktig email från Zustand-storen */}
+              {/*  email from Zustand-store */}
               <AccountValue>{user?.email}</AccountValue>
             </div>
           </AccountRow>
@@ -359,11 +341,9 @@ const ProfilPage = () => {
         <Divider />
 
 
-        {/* Åtgärder */}
         <SectionLabel>Inställningar</SectionLabel>
         <ActionList>
 
-          {/* Logga ut — fyll i onClick */}
           <ActionBtn $delay="0s" onClick={() => {window.location.href = '/login'}}>
             <ActionIcon $color="rgba(255,255,255,0.08)" $iconColor="rgba(255,255,255,0.6)">
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -395,9 +375,8 @@ const ProfilPage = () => {
         </ActionList>
 
 
-        {/* Radera konto — destructive action */}
         <SectionLabel>Farlig zon</SectionLabel>
-        <DeleteBtn onClick={() => {}}>
+        <DeleteBtn onClick={() => {}}> {/* will do later */}
           <ActionIcon $color="rgba(255,80,80,0.1)" $iconColor="rgba(255,120,120,0.9)">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
               <path d="M2 4h12M5 4V3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1M6 7v5M10 7v5M3 4l1 9a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1l1-9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
