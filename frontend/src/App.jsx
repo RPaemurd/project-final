@@ -9,6 +9,7 @@ import FaqPage from "./pages/FaqPage";
 import OmOssPage from "./pages/OmossPage";
 import HurdetFungerar from "./pages/Hurdetfungerarpage"
 import ProtectedRoute from "./components/ProtectedRoute";
+import ProfilPage from "./pages/ProfilPage";
 
 export const App = () => {
 
@@ -19,9 +20,10 @@ export const App = () => {
       <Routes> 
           <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={<LoginPage />} />
-          <ProtectedRoute>
-            <Route path="/profil" element={<ProfilPage />} />
-          </ProtectedRoute>
+          <Route path="/profil" element={
+            <ProtectedRoute> 
+              <ProfilPage /> 
+            </ProtectedRoute> } />
           <Route path="/medicin" element={<MedicinPage />} />
           <Route path="/oss" element={<OmOssPage />} />
           <Route path="/hurdetfungerar" element={<HurdetFungerar />} />

@@ -68,7 +68,11 @@ router.post("/login", async (req, res) => {
     }
     //sparar användarens id i sessionen
     req.session.userId = user._id;
-    res.status(200).json({ message: 'Inloggad!' });
+    res.status(200).json({ 
+        message: 'Inloggad!', 
+        email: user.email,
+        id: user._id
+    });
 })
 
 export default router;

@@ -379,7 +379,7 @@ const LoginPage = ({ onLogin }) => {
 
     if (response.ok) {
       login(data)
-      navigate('/medicin');
+      navigate('/profil');
     } else {
       setError(data.message)
     }
