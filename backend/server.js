@@ -2,8 +2,9 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from 'dotenv';
-/* import session from 'express-session';
- */
+import authRoutes from "./routes/auth";
+import session from 'express-session';
+
 dotenv.config();
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/final-project";
@@ -19,15 +20,17 @@ app.use(express.json());
 // secret: en hemlig nyckel som krypterar sessionen
 // resave: spara inte sessionen om inget ändrats
 // saveUninitialized: spara inte tomma sessioner
-/* app.use(session({
+ app.use(session({
   secret: process.env.SESSION_SECRET || 'secret-key',
   resave: false,
   saveUninitialized: false,
-})); */
+})); 
 
-app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
-});
+//berättar för express att alla routes i auth.js ska börja med api
+//register bli /api/register
+app.use("/api", authRoutes);
+
+app.use
 
 // Start the server
 mongoose.connect(mongoUrl)

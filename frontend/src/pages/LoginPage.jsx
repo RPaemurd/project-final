@@ -345,11 +345,58 @@ const LoginPage = ({ onLogin }) => {
   const [email, setEmail]       = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (e) => {
+  const [isLogin, setIsLogin] = useState('true');
+  const [error, setError] = useState('');
+  
+/*   const [confirmPassword, setconfirmPassword] = useState('')
+ */
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (onLogin) onLogin({ email });
-    window.location.href = '/symptomkoll';
+
+    const response = await fetch("http://localhost:8081/api/login", {
+    
+      method: "POST", 
+      headers: {
+        "Content-Type": "application/json" //vi säger att vi skickar json
+      },
+      body: JSON.stringify({
+        email: email,
+        password: password
+      })
+    });
+
+    const data = await response.json()
+
+    if (response.ok) {
+      window.location.href = "/medicin"
+    } else {
+      setError(data.message)
+    }
   };
+
+  const handleRegister = async (e) => {
+    e.preventDefault();
+
+    const response = await fetch("http://localhost:8081/api/register", {
+
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        email: email,
+        password: password
+      })
+    });
+
+    const data = await response.json()
+
+    if (response.ok){
+      setIsLogin(true);
+    } else {
+      setError(data.message)
+    }
+  }
 
   return (
     <Frame>
@@ -399,6 +446,8 @@ const LoginPage = ({ onLogin }) => {
             <LogoText>Stoppa Proppen</LogoText>
           </MobileLogo>
 
+          {isLogin ? ( 
+            <> 
           <FormHeading>Logga in</FormHeading>
           <FormSubtext>Ange dina uppgifter för att fortsätta</FormSubtext>
 
@@ -423,14 +472,38 @@ const LoginPage = ({ onLogin }) => {
             <DividerLine /><DividerText>ELLER</DividerText><DividerLine />
           </Divider>
 
-          <GhostBtn onClick={() => window.location.href = '/symptomkoll'}>
+          <GhostBtn onClick={() => window.location.href = '/medicin'}>
             Fortsätt som gäst
           </GhostBtn>
-
+        
           <RegisterLink>
-            Inget konto? <a href="/registrera">Skapa ett här</a>
+            Inget konto? <a onClick={() => setIsLogin(false)}>Skapa ett här</a>
           </RegisterLink>
-        </RightPanel>
+          </>
+          ) : ( 
+          <>
+             <FormHeading>Skapa Konto</FormHeading>
+          <FormSubtext>Ange dina uppgifter för att fortsätta</FormSubtext>
+
+          <form onSubmit={handleRegister}>
+            <FormGroup>
+              <Label htmlFor="email">E-postadress</Label>
+              <Input id="email" type="email" placeholder="namn@exempel.se"
+                value={email} onChange={e => setEmail(e.target.value)} required />
+            </FormGroup>
+            <FormGroup>
+              <Label htmlFor="password">Lösenord</Label>
+              <Input id="password" type="password" placeholder="••••••••"
+                value={password} onChange={e => setPassword(e.target.value)} required />
+            </FormGroup>
+            <RegisterLink>
+              Har du redan ett lösenord? <a onClick={() => setIsLogin(true)}>Logga in här</a>
+            </RegisterLink>
+            <SubmitBtn type="submit">Registrera</SubmitBtn>
+          </form>
+          </>
+          )}
+          </RightPanel>
       </SplitCard>
   
     </Frame>
