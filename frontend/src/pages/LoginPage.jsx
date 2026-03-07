@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Frame, fadeUp, fadeLeft } from '../components/Layout.jsx';
 import { theme } from '../styles/theme';
+import useUserStore from '../store/userStore.js';
+import { useNavigate } from 'react-router-dom';
+
 
 // ─── Split card ───────────────────────────────────────────────
 const SplitCard = styled.div`
@@ -312,6 +315,7 @@ const RegisterLink = styled.p`
     color: ${theme.colors.mint};
     text-decoration: none;
     &:hover { color: #fff; }
+    cursor: pointer;
   }
 `;
 
@@ -345,9 +349,15 @@ const LoginPage = ({ onLogin }) => {
   const [email, setEmail]       = useState('');
   const [password, setPassword] = useState('');
 
-  const [isLogin, setIsLogin] = useState('true');
+  const [isLogin, setIsLogin] = useState(true);
   const [error, setError] = useState('');
-  
+
+  const navigate = useNavigate();
+  const login = useUserStore(state => state.login);
+  const isLoggedIn = useUserStore(state => state.isLoggedIn);
+    console.log('isLoggedIn:', isLoggedIn)
+
+
 /*   const [confirmPassword, setconfirmPassword] = useState('')
  */
   const handleSubmit = async (e) => {
@@ -357,7 +367,7 @@ const LoginPage = ({ onLogin }) => {
     
       method: "POST", 
       headers: {
-        "Content-Type": "application/json" //vi säger att vi skickar json
+        "Content-Type": "application/json" //we are saying that we are sending json 
       },
       body: JSON.stringify({
         email: email,
@@ -368,7 +378,8 @@ const LoginPage = ({ onLogin }) => {
     const data = await response.json()
 
     if (response.ok) {
-      window.location.href = "/medicin"
+      login(data)
+      navigate('/medicin');
     } else {
       setError(data.message)
     }
@@ -465,6 +476,7 @@ const LoginPage = ({ onLogin }) => {
             <ForgotRow>
               <ForgotLink href="/glömt-lösenord">Glömt lösenordet?</ForgotLink>
             </ForgotRow>
+            {error && <p style={{ color: 'red' }}>{error}</p>}
             <SubmitBtn type="submit">Logga in</SubmitBtn>
           </form>
 
@@ -499,6 +511,7 @@ const LoginPage = ({ onLogin }) => {
             <RegisterLink>
               Har du redan ett lösenord? <a onClick={() => setIsLogin(true)}>Logga in här</a>
             </RegisterLink>
+            {error && <p style={{ color: 'red' }}>{error}</p>}
             <SubmitBtn type="submit">Registrera</SubmitBtn>
           </form>
           </>
