@@ -5,6 +5,7 @@ import { theme } from '../styles/theme';
 import useUserStore from '../store/userStore.js';
 import { useNavigate } from 'react-router-dom';
 
+const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8081'; //if the production doesnt work, use an env variabel
 
 // ─── Split card ───────────────────────────────────────────────
 const SplitCard = styled.div`
@@ -355,7 +356,7 @@ const LoginPage = ({ onLogin }) => {
   const navigate = useNavigate();
   const login = useUserStore(state => state.login);
   const isLoggedIn = useUserStore(state => state.isLoggedIn);
-    console.log('isLoggedIn:', isLoggedIn)
+   /*  console.log('isLoggedIn:', isLoggedIn) */
 
 
 /*   const [confirmPassword, setconfirmPassword] = useState('')
@@ -363,7 +364,7 @@ const LoginPage = ({ onLogin }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const response = await fetch(`${import.meta.env.VITE_API_URL}/api/login`, {
+    const response = await fetch(`${BASE_URL}/api/login`, {
     
       method: "POST", 
       headers: {
@@ -388,7 +389,7 @@ const LoginPage = ({ onLogin }) => {
   const handleRegister = async (e) => {
     e.preventDefault();
 
-    const response = await fetch(`${import.meta.env.VITE_API_URL}/api/register`, {
+    const response = await fetch(`${BASE_URL}/api/register`, {
 
       method: "POST",
       headers: {

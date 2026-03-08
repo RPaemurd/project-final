@@ -340,7 +340,7 @@ const ProfilPage = () => {
         <SectionLabel>Inställningar</SectionLabel>
         <ActionList>
 
-          <ActionBtn $delay="0s" onClick={() => {window.location.href = '/login'}}>
+          <ActionBtn $delay="0s" onClick={() => {logout(); navigate("/login")}}>
             <ActionIcon $color="rgba(255,255,255,0.08)" $iconColor="rgba(255,255,255,0.6)">
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                 <path d="M6 2H3a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
