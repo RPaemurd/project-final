@@ -30,8 +30,6 @@ app.use(express.json());
 // register becomes /api/register
 app.use("/api", authRoutes);
 
-app.use
-
 // Start the server
 mongoose.connect(mongoUrl)
   .then(() => {
