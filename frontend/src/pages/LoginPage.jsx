@@ -312,9 +312,13 @@ const RegisterLink = styled.p`
   font-size: 0.8rem;
   color: rgba(255,255,255,0.6);
 
-  a {
+  button {
+    background: none;
+    border: none;
+    padding: 0;
     color: ${theme.colors.mint};
     text-decoration: none;
+    font-size: inherit;
     &:hover { color: #fff; }
     cursor: pointer;
   }
@@ -490,7 +494,7 @@ const LoginPage = ({ onLogin }) => {
           </GhostBtn>
         
           <RegisterLink>
-            Inget konto? <a onClick={() => setIsLogin(false)}>Skapa ett här</a>
+            Inget konto? <button onClick={() => setIsLogin(false)}>Skapa ett här</button>
           </RegisterLink>
           </>
           ) : ( 
@@ -510,7 +514,7 @@ const LoginPage = ({ onLogin }) => {
                 value={password} onChange={e => setPassword(e.target.value)} required />
             </FormGroup>
             <RegisterLink>
-              Har du redan ett lösenord? <a onClick={() => setIsLogin(true)}>Logga in här</a>
+              Har du redan ett lösenord? <button onClick={() => setIsLogin(true)}>Logga in här</button>
             </RegisterLink>
             {error && <p style={{ color: 'red' }}>{error}</p>}
             <SubmitBtn type="submit">Registrera</SubmitBtn>
