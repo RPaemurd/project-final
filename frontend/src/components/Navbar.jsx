@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { theme } from '../styles/theme';
 import { useLocation } from 'react-router-dom';
 import { useWindowSize } from "usehooks-ts";
+import useUserStore from '../store/userStore';
 
 // ─── Styles ───────────────────────────────────────────────────
 const Nav = styled.nav`
@@ -222,6 +223,9 @@ const Navbar = ({ variant = 'default', user = null, logoHref = '/' }) => {
   const { width } = useWindowSize();
   const isMobile = width < 768;
 
+  const isLoggedIn = useUserStore(state => state.isLoggedIn);
+  const storeUser = useUserStore(state => state.user);
+  
   return (
     <>
       <Nav>
@@ -245,8 +249,15 @@ const Navbar = ({ variant = 'default', user = null, logoHref = '/' }) => {
         </NavLinks>
       )}
 
-      {!isMobile && variant === 'default' && (
+      {!isMobile && variant === 'default' && !isLoggedIn && (
         <NavCta href="/login">Kom igång</NavCta>
+      )}
+
+      {!isMobile && variant === 'default' && isLoggedIn && (
+        <UserPill>
+          <Avatar>👤</Avatar>
+          {storeUser?.email}
+        </UserPill>
       )}
 
         {variant === 'app' && user && (
