@@ -5,6 +5,7 @@ import Navbar from '../components/Navbar.jsx';
 import { theme } from '../styles/theme';
 import { Link } from 'react-router-dom';
 import useUserStore from '../store/userStore.js';
+import { useNavigate } from "react-router-dom";
 
 
 // ─── SCROLL-AREA ──────────────────────────────────────────────────────────────
@@ -273,6 +274,9 @@ const DeleteSub = styled.div`
 // ─── PAGE ─────────────────────────────────────────────────────────────────────
 const ProfilPage = () => { 
     const user = useUserStore(state => state.user);
+    const logout = useUserStore(state => state.logout);
+    const navigate = useNavigate();
+
     return ( 
   <Frame>
     <Card>

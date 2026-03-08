@@ -234,7 +234,7 @@ const Navbar = ({ variant = 'default', user = null, logoHref = '/' }) => {
           <LogoText>Stoppa Proppen</LogoText>
         </LogoWrap>
 
-        {/* NavLinks visas bara på desktop — inuti Nav */}
+        {/* if its not mobile, show navlinks */}
       {!isMobile && variant === 'default' && (
         <NavLinks>
           <li><NavLink href="/">Hem</NavLink></li>
