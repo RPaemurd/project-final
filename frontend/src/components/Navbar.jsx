@@ -83,7 +83,7 @@ const NavCta = styled.a`
   }
 `;
 
-// ─── Hamburger button (bara mobil) ────────────────────────────
+// ─── Hamburger button (mobile only) ───────────────────────────
 const HamburgerBtn = styled.button`
   display: flex;
   flex-direction: column;
@@ -166,7 +166,7 @@ const MobileCta = styled.a`
   &:hover { background: #fff; }
 `;
 
-// Tillbaka-knapp i app-varianten — tar användaren till startsidan
+// Back button in the app variant — takes the user to the home page
 const BackBtn = styled.a`
   display: flex;
   align-items: center;
@@ -259,7 +259,7 @@ const Navbar = ({ variant = 'default', user = null, logoHref = '/' }) => {
         )}
       </Nav>
 
-      {/* Hamburgare på mobil — outside Nav to avoid its stacking context */}
+      {/* Hamburger on mobile — outside Nav to avoid its stacking context */}
       {variant === 'default' && (
         <HamburgerBtn onClick={toggleMenu}
           aria-label={menuOpen ? 'Stäng meny' : 'Öppna meny'}>

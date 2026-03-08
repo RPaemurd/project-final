@@ -4,14 +4,14 @@ import { Frame, Card, CornerLabel, fadeUp, fadeLeft, pulse } from '../components
 import Navbar from '../components/Navbar.jsx';
 import { theme } from '../styles/theme';
 
-// ─── ANIMATIONER ─────────────────────────────────────────────
-// Växer progressbaren från 0 till sin slutbredd
+// ─── ANIMATIONS ──────────────────────────────────────────────
+// Grows the progress bar from 0 to its final width
 const growBar = keyframes`from { width: 0; }`;
 
 
 // ─── HERO ─────────────────────────────────────────────────────
-// MOBIL (bas):  centrerat innehåll, mindre padding
-// DESKTOP 768+: mer padding runt om
+// MOBILE (base): centered content, less padding
+// DESKTOP 768+: more padding all around
 const Hero = styled.div`
   /* MOBIL */
   position: relative;
@@ -31,7 +31,7 @@ const Hero = styled.div`
   }
 `;
 
-// Liten pill-badge högst upp, t.ex. "Beta — Nu tillgänglig"
+// Small pill badge at the top, e.g. "Beta — Now available"
 const Badge = styled.div`
   display: inline-flex;
   align-items: center;
@@ -48,7 +48,7 @@ const Badge = styled.div`
   animation: ${fadeUp} 0.8s ease both;
 `;
 
-// Den pulserande gröna punkten i badge
+// The pulsing green dot in the badge
 const BadgeDot = styled.span`
   width: 6px;
   height: 6px;
@@ -58,9 +58,9 @@ const BadgeDot = styled.span`
   animation: ${pulse} 2s infinite;
 `;
 
-// Stor rubrik
-// clamp() gör storleken responsiv utan media query:
-//   min 2.4rem, ökar med skärmbredden, max 5.2rem
+// Large heading
+// clamp() makes the size responsive without media queries:
+//   min 2.4rem, grows with screen width, max 5.2rem
 const H1 = styled.h1`
   font-family: ${theme.fonts.serif};
   font-size: clamp(2.4rem, 6vw, 5.2rem);
@@ -78,7 +78,7 @@ const H1 = styled.h1`
   }
 `;
 
-// Underrubrik / beskrivningstext
+// Subtitle / description text
 const HeroSub = styled.p`
   /* MOBIL */
   font-size: 0.92rem;
@@ -95,7 +95,7 @@ const HeroSub = styled.p`
   }
 `;
 
-// Wrapper för knappar/länkar under texten
+// Wrapper for buttons/links below the text
 const HeroActions = styled.div`
   display: flex;
   gap: 1rem;
@@ -105,7 +105,7 @@ const HeroActions = styled.div`
   justify-content: center;
 `;
 
-// Diskret ghost-länk, t.ex. "Läs mer →"
+// Subtle ghost link, e.g. "Read more →"
 const BtnGhostLink = styled.a`
   font-size: 0.85rem;
   font-weight: 400;
@@ -122,10 +122,10 @@ const BtnGhostLink = styled.a`
 `;
 
 
-// ─── STATISTIK-PILLS ──────────────────────────────────────────
-// Tre pills längst ner i hero-sektionen.
-// MOBIL (bas):  döljs — tar för mycket plats på liten skärm
-// DESKTOP 768+: visas längst ner på kortet
+// ─── STATS PILLS ──────────────────────────────────────────────
+// Three pills at the bottom of the hero section.
+// MOBILE (base): hidden — takes too much space on small screen
+// DESKTOP 768+: shown at the bottom of the card
 const Stats = styled.div`
   /* MOBIL: döljs */
  /*  display: none; */
@@ -136,7 +136,7 @@ const Stats = styled.div`
   flex-wrap: wrap;
   animation: ${fadeUp} 0.8s 0.4s ease both;
 
-  /* DESKTOP 768+: visas */
+  /* DESKTOP 768+: shown */
   @media (min-width: 768px) {
     position: absolute;
     bottom: 2.5rem;
@@ -173,15 +173,15 @@ const StatSep = styled.span`
 `;
 
 
-// ─── FLOAT-KORT ───────────────────────────────────────────────
-// Det svävande kortet med "riskbedömning"-animationen.
-// MOBIL (bas):  döljs — tar för mycket plats
-// DESKTOP 900+: visas till höger om hero-texten
+// ─── FLOAT CARD ───────────────────────────────────────────────
+// The floating card with the "risk assessment" animation.
+// MOBILE (base): hidden — takes too much space
+// DESKTOP 900+: shown to the right of the hero text
 const FloatCard = styled.div`
-  /* MOBIL: döljs */
+  /* MOBILE: hidden */
   display: none;
 
-  /* DESKTOP 900+: visas som ett svävande kort */
+  /* DESKTOP 900+: shown as a floating card */
   @media (min-width: 900px) {
     display: block;
     position: absolute;
@@ -285,14 +285,14 @@ const LandingPage = () => (
         </HeroActions>
       </Hero>
 
-      {/* Stats döljs på mobil, visas på desktop */}
+      {/* Stats hidden on mobile, shown on desktop */}
       <Stats>
         <StatPill><strong>Medicinsk vägledning</strong><StatSep />Gratis</StatPill>
         <StatPill><strong>Community & stöd</strong><StatSep />Alltid tillgänglig</StatPill>
         <StatPill><strong>Snabb hjälp</strong><StatSep />Symtomkoll på under 60 sek</StatPill>
     </Stats>
 
-      {/* FloatCard döljs på mobil, visas på desktop */}
+      {/* FloatCard hidden on mobile, shown on desktop */}
       <FloatCard>
         <FloatLabel>Din riskbedömning</FloatLabel>
         <FloatTitle>Symtomanalys<br />pågår…</FloatTitle>
@@ -305,7 +305,7 @@ const LandingPage = () => (
 );
 
 
-// ─── SVG-IKONER ───────────────────────────────────────────────
+// ─── SVG ICONS ────────────────────────────────────────────────
 const ArrowIcon = () => (
   <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
     <path d="M3 7h8M8 4.5l2.5 2.5L8 9.5"

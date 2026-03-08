@@ -1,45 +1,45 @@
 import express from "express"
-import User from "../models/User.js" //denna behöver vi för att kunna spara och hämta användare i MongoDB
+import User from "../models/User.js" // we need this to save and retrieve users in MongoDB
 import bcrypt from "bcrypt";
 
-//mini server - hanterar bara sina egna routes, istället för att ha alla routes i server.js - kopplar vi sen ihop den med routern i huvudappen
+// mini server - only handles its own routes, instead of having all routes in server.js - we then connect it with the router in the main app
 const router = express.Router();
 
-//async - menas att routen innehåller kod som tar tid( prata med databasen )
-// utan async/await kan vi inte vänta på svar från MongoDB
+// async - means the route contains code that takes time (talking to the database)
+// without async/await we cannot wait for a response from MongoDB
 router.post("/register", async (req, res) => {
 
-    //body innehåller datan användaren skickade från formuläret
-    // destructuring = vi plockar ut email och password direkt istället för req.body.email
+    // body contains the data the user submitted from the form
+    // destructuring = we extract email and password directly instead of req.body.email
     const { email, password } = req.body;
 
-    //Kollar om användaren faktiskt har fyllt i fälten
-    //! betyder "inte" - så om email saknas 
+    // Checks if the user has actually filled in the fields
+    // ! means "not" - so if email is missing
     if (!email || !password) {
 
-        //stoppa routern här så att resten av koden inte körs
-        //status 400 
+        // stop the router here so the rest of the code does not run
+        // status 400
         return res.status(400).json({ message: "Email och lösenord krävs"});
     }
 
-//kollar om emailen redan finns i databasen, findOne letar efter ett dokument som matchar, returnerar null om inget hittas
+// checks if the email already exists in the database, findOne looks for a matching document, returns null if nothing found
 const existingUser = await User.findOne({ email });
 
 if (existingUser) {
     return res.status(400).json({ message: "Email redan registrerad"});
 }
-//10 betyder att lösenordet processas 10 gånger
-//await vänta tills krypteringen är klar innan det skickas vidare
+// 10 means the password is hashed 10 times
+// await wait until encryption is complete before proceeding
 const hashedPassword = await bcrypt.hash(password, 10);
 
-//newUser skapar ett nytt användarobjekt med vårat schema
-//vi skickar in email och det krypterade lösenordet
+// newUser creates a new user object with our schema
+// we pass in email and the hashed password
 const newUser = new User({
     email: email, 
     password: hashedPassword,
 });
-//sparar användaren till mongoDB
-//await - vänta tills sparandet är klart
+// saves the user to MongoDB
+// await - wait until saving is complete
 await newUser.save();
 
 res.status(201).json({ message: "Konto skapat!" });
@@ -53,20 +53,20 @@ router.post("/login", async (req, res) => {
     return res.status(400).json({ message: 'Email och lösenord krävs' });
     }
 
-    //letar efter användarens email i databasen 
+    // looks for the user's email in the database
     const user = await User.findOne({ email });
-    //om null skickas tillbaka nekas inloggningen
+    // if null is returned the login is denied
     if (!user) {
     return res.status(401).json({ message: "Fel email eller lösenord"});
     }
 
-    //compare jämför lösenordet med det krypterade, await vänta tills dom jämförts, returnerar true om dom matchar false anars
+    // compare compares the password with the hashed one, await wait until compared, returns true if they match false otherwise
     const isMatch = await bcrypt.compare(password, user.password);
-    //om lösenordet inte matchar nekas inlogg
+    // if the password does not match login is denied
     if(!isMatch){
     return res.status(401).json({ message: "Fel email eller lösenord"})
     }
-    //sparar användarens id i sessionen
+    // saves the user's id in the session
     req.session.userId = user._id;
     res.status(200).json({ 
         message: 'Inloggad!', 

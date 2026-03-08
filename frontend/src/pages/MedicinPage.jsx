@@ -1,60 +1,60 @@
 import React, { useState } from 'react';
 import styled, { keyframes, css } from 'styled-components';
 
-// react-toastify: toast = triggar en notis, ToastContainer = måste finnas i trädet
+// react-toastify: toast = triggers a notification, ToastContainer = must exist in the tree
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-// Frame = yttersta wrapper, Card = gradient-kortet,
+// Frame = outermost wrapper, Card = gradient card,
 import { Frame, Card, CornerLabel, fadeUp } from '../components/Layout.jsx';
 import Navbar from '../components/Navbar.jsx';
 import { theme } from '../styles/theme';
 import BottomNav from "../components/BottomNav.jsx"
 
 
-// ─── ANIMATIONER ─────────────────────────────────────────────────────────────
+// ─── ANIMATIONS ──────────────────────────────────────────────────────────────
 
-// Glider upp från nedanför — används på medicin-korten och modal-sheeten
+// Slides up from below — used on the medicine cards and modal sheet
 const slideUp = keyframes`
   from { opacity: 0; transform: translateY(20px); }
   to   { opacity: 1; transform: translateY(0); }
 `;
 
-// Studs-animation när en medicin markeras som tagen
+// Bounce animation when a medicine is marked as taken
 const checkPop = keyframes`
   0%   { transform: scale(0.8); }
   60%  { transform: scale(1.2); }
   100% { transform: scale(1); }
 `;
 
-// Enkel fade-in för modal-bakgrunden
+// Simple fade-in for the modal background
 const fadeIn = keyframes`
   from { opacity: 0; }
   to   { opacity: 1; }
 `;
 
 
-// ─── SCROLL-AREA ─────────────────────────────────────────────────────────────
-// Innehåller hela medicin-listan och kan scrollas.
-// padding-bottom är stor (7rem) så innehållet inte döljs bakom den fasta knappen.
-// Scrollbaren döljs visuellt för ett renare mobilutseende.
+// ─── SCROLL AREA ─────────────────────────────────────────────────────────────
+// Contains the entire medicine list and is scrollable.
+// padding-bottom is large (7rem) so content is not hidden behind the fixed button.
+// The scrollbar is hidden visually for a cleaner mobile appearance.
 //
-// MOBIL (bas):  full bredd, mindre sidpadding
-// DESKTOP 768+: begränsad max-bredd och centreras med margin: auto
+// MOBILE (base): full width, less side padding
+// DESKTOP 768+: limited max-width and centered with margin: auto
 const ScrollArea = styled.div`
-  /* MOBIL: full bredd, lite luft på sidorna */
+  /* MOBILE: full width, some padding on the sides */
   position: relative;
   z-index: 10;
   flex: 1;
   overflow-y: auto;
-  padding: 0.5rem 1.4rem 7rem; /* stor bottom-padding pga den fasta knappen */
+  padding: 0.5rem 1.4rem 7rem; /* large bottom padding due to the fixed button */
 
-  /* Döljer scrollbaren i Firefox */
+  /* Hides the scrollbar in Firefox */
   scrollbar-width: none;
-  /* Döljer scrollbaren i Chrome/Safari */
+  /* Hides the scrollbar in Chrome/Safari */
   &::-webkit-scrollbar { display: none; }
 
-  /* DESKTOP 768+: begränsa bredden och centrera */
+  /* DESKTOP 768+: limit width and center */
   @media (min-width: 768px) {
     padding: 0.5rem 2.5rem 5rem;
     max-width: 640px;
@@ -64,17 +64,17 @@ const ScrollArea = styled.div`
 `;
 
 
-// ─── DAGSSTATUS-SEKTION ───────────────────────────────────────────────────────
-// Visar datum, veckodagsnamn och hur många mediciner som är kvar.
-// Inga responsiva skillnader här — fungerar lika bra på alla skärmar.
+// ─── DAY STATUS SECTION ───────────────────────────────────────────────────────
+// Shows date, weekday name and how many medicines are left.
+// No responsive differences here — works equally well on all screens.
 
-// Wrapper för hela blocket, glider in vid sidladdning
+// Wrapper for the whole block, slides in on page load
 const DayHeader = styled.div`
   margin-bottom: 1.5rem;
   animation: ${fadeUp} 0.6s ease both;
 `;
 
-// Liten etikett ovanför, t.ex. "26 februari"
+// Small label above, e.g. "26 February"
 const DayLabel = styled.div`
   font-size: 0.68rem;
   font-weight: 500;
@@ -84,9 +84,9 @@ const DayLabel = styled.div`
   margin-bottom: 0.3rem;
 `;
 
-// Stor serif-rubrik, t.ex. "Måndag — 2 kvar"
-// clamp() gör fontstorleken responsiv utan media queries:
-//   minimum 1.6rem, ökar med 5% av viewportbredden, max 2.2rem
+// Large serif heading, e.g. "Monday — 2 left"
+// clamp() makes the font size responsive without media queries:
+//   minimum 1.6rem, grows by 5% of the viewport width, max 2.2rem
 const DayTitle = styled.h2`
   font-family: ${theme.fonts.serif};
   font-size: clamp(1.6rem, 5vw, 2.2rem);
@@ -96,7 +96,7 @@ const DayTitle = styled.h2`
   em { font-style: italic; color: rgba(255,255,255,0.65); }
 `;
 
-// Undertext, t.ex. "1 av 2 mediciner tagna idag"
+// Subtext, e.g. "1 of 2 medicines taken today"
 const DaySubtext = styled.p`
   font-size: 0.82rem;
   color: rgba(255,255,255,0.6);
@@ -104,10 +104,10 @@ const DaySubtext = styled.p`
 `;
 
 
-// ─── SEKTION-RUBRIK ───────────────────────────────────────────────────────────
-// Rubrikerna "Idag" och "Imorgon".
-// ::after skapar den horisontella linjen till höger om texten.
-// Inga responsiva skillnader.
+// ─── SECTION HEADING ───────────────────────────────────────────────────────────
+// The headings "Today" and "Tomorrow".
+// ::after creates the horizontal line to the right of the text.
+// No responsive differences.
 const SectionTitle = styled.div`
   font-size: 0.65rem;
   font-weight: 500;
@@ -128,14 +128,14 @@ const SectionTitle = styled.div`
 `;
 
 
-// ─── MEDICIN-KORT ─────────────────────────────────────────────────────────────
-// $taken (boolean): styr grön eller neutral färgton
-// $delay (sträng):  animationsfördröjning per kort för sekventiell inglid
+// ─── MEDICINE CARD ─────────────────────────────────────────────────────────────
+// $taken (boolean): controls green or neutral colour
+// $delay (string):   animation delay per card for sequential slide-in
 //
-// MOBIL (bas):  kompaktare padding
-// DESKTOP 768+: lite mer luft
+// MOBILE (base): more compact padding
+// DESKTOP 768+: a little more space
 const MedCard = styled.div`
-  /* MOBIL: kompakt padding */
+  /* MOBILE: compact padding */
   background: ${({ $taken }) => $taken ? 'rgba(125,255,212,0.08)' : 'rgba(0,0,0,0.25)'};
   border: 1px solid ${({ $taken }) => $taken ? 'rgba(125,255,212,0.3)' : 'rgba(255,255,255,0.15)'};
   border-radius: 14px;
@@ -147,7 +147,7 @@ const MedCard = styled.div`
   transition: border-color 0.3s, background 0.3s;
   animation: ${slideUp} 0.5s ${({ $delay }) => $delay || '0s'} ease both;
 
-  /* DESKTOP 768+: mer luft och rundare hörn */
+  /* DESKTOP 768+: more space and rounder corners */
   @media (min-width: 768px) {
     border-radius: 16px;
     padding: 1rem 1.2rem;
@@ -156,11 +156,11 @@ const MedCard = styled.div`
   }
 `;
 
-// Rund checkknapp till vänster.
-// $taken styr färg. checkPop-animationen spelas bara när $taken är true.
-// Storleken är 40px på mobil (lättare att trycka) och 36px på desktop.
+// Round check button on the left.
+// $taken controls colour. The checkPop animation only plays when $taken is true.
+// Size is 40px on mobile (easier to tap) and 36px on desktop.
 const CheckBtn = styled.button`
-  /* MOBIL: lite större för enklare touch-interaktion */
+  /* MOBILE: slightly larger for easier touch interaction */
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -177,43 +177,43 @@ const CheckBtn = styled.button`
 
   &:active { transform: scale(0.92); }
 
-  /* DESKTOP 768+: standard storlek */
+  /* DESKTOP 768+: standard size */
   @media (min-width: 768px) {
     width: 36px;
     height: 36px;
   }
 `;
 
-// Mittencolumn med namn och dos — klickbar för att öppna redigera-modalen
+// Middle column with name and dose — clickable to open the edit modal
 const MedInfo = styled.div`
   flex: 1;
-  min-width: 0; /* förhindrar text-overflow utanför kortet */
+  min-width: 0; /* prevents text overflow outside the card */
   cursor: pointer;
 `;
 
-// Medicinnamn med genomstrykning och tonad färg när tagen
+// Medicine name with strikethrough and faded colour when taken
 const MedName = styled.div`
-  /* MOBIL: standard storlek */
+  /* MOBILE: standard size */
   font-size: 0.92rem;
   font-weight: 500;
   color: ${({ $taken }) => $taken ? 'rgba(255,255,255,0.45)' : '#fff'};
   text-decoration: ${({ $taken }) => $taken ? 'line-through' : 'none'};
   transition: color 0.3s;
 
-  /* DESKTOP 768+: något större */
+  /* DESKTOP 768+: slightly larger */
   @media (min-width: 768px) {
     font-size: 0.95rem;
   }
 `;
 
-// Dos-text, t.ex. "5 mg"
+// Dose text, e.g. "5 mg"
 const MedDose = styled.div`
   font-size: 0.75rem;
   color: rgba(255,255,255,0.4);
   margin-top: 0.15rem;
 `;
 
-// Höger kolumn: tid, tagen-klockslag och åtgärdsknappar
+// Right column: time, taken-time and action buttons
 const MedRight = styled.div`
   display: flex;
   flex-direction: column;
@@ -221,7 +221,7 @@ const MedRight = styled.div`
   gap: 0.3rem;
 `;
 
-// Tidtext, t.ex. "kl 20:00" (amber) eller "✓ Tagen" (grön)
+// Time text, e.g. "kl 20:00" (amber) or "✓ Tagen" (green)
 const MedTime = styled.div`
   font-size: 0.72rem;
   font-weight: 500;
@@ -229,17 +229,17 @@ const MedTime = styled.div`
   white-space: nowrap;
 `;
 
-// Klockslag för när medicinen faktiskt togs, t.ex. "08:14"
+// Timestamp for when the medicine was actually taken, e.g. "08:14"
 const TakenTime = styled.div`
   font-size: 0.68rem;
   color: rgba(125,255,212,0.55);
 `;
 
 
-// ─── ÅTGÄRDSKNAPPAR (REDIGERA / TA BORT) ─────────────────────────────────────
-// $danger (boolean): false = neutral (penna), true = röd (papperskorg)
+// ─── ACTION BUTTONS (EDIT / DELETE) ─────────────────────────────────────────
+// $danger (boolean): false = neutral (pencil), true = red (trash)
 //
-// MOBIL (bas):  lite större (44px) för touch
+// MOBILE (base): slightly larger (44px) for touch
 // DESKTOP 768+: standard (30px)
 
 const ActionRow = styled.div`
@@ -249,7 +249,7 @@ const ActionRow = styled.div`
 `;
 
 const IconBtn = styled.button`
-  /* MOBIL: touch-vänlig storlek (44px rekommenderas av Apple/Google) */
+  /* MOBILE: touch-friendly size (44px recommended by Apple/Google) */
   width: 34px;
   height: 34px;
   border-radius: 8px;
@@ -264,7 +264,7 @@ const IconBtn = styled.button`
 
   &:active { transform: scale(0.92); }
 
-  /* DESKTOP 768+: kompaktare storlek + hover-effekter (hover finns inte på touch) */
+  /* DESKTOP 768+: more compact size + hover effects (hover does not exist on touch) */
   @media (min-width: 768px) {
     width: 30px;
     height: 30px;
@@ -278,9 +278,9 @@ const IconBtn = styled.button`
 `;
 
 
-// ─── IMORGON-KORT ─────────────────────────────────────────────────────────────
-// Nedtonade, informativa kort utan åtgärdsknappar.
-// Inga responsiva skillnader behövs här.
+// ─── TOMORROW CARD ─────────────────────────────────────────────────────────────
+// Dimmed, informative cards without action buttons.
+// No responsive differences needed here.
 const TomorrowCard = styled.div`
   background: rgba(0,0,0,0.15);
   border: 1px solid rgba(255,255,255,0.08);
@@ -312,7 +312,7 @@ const TomorrowTime = styled.div`
 `;
 
 
-// Knappen är fixed längst ner.
+// The button is fixed at the bottom.
 
 const AddBtnWrap = styled.div`
   position: fixed;
@@ -347,7 +347,7 @@ const AddBtn = styled.button`
   box-shadow: 0 8px 30px rgba(0,0,0,0.3);
   transition: background 0.2s, transform 0.15s;
 
-  /* Hover finns bara på desktop — på mobil är det :active som gäller */
+  /* Hover only exists on desktop — on mobile :active is used instead */
   @media (min-width: 768px) {
     &:hover { background: #fff; transform: translateY(-1px); }
   }
@@ -356,48 +356,48 @@ const AddBtn = styled.button`
 
 
 // ─── MODAL BACKDROP ───────────────────────────────────────────────────────────
-// Täcker hela skärmen bakom modalen.
-// Klick på backdropen (inte på Sheet) stänger modalen via e.target check i JSX.
+// Covers the entire screen behind the modal.
+// Clicking the backdrop (not the Sheet) closes the modal via e.target check in JSX.
 //
-// MOBIL (bas):  align-items: flex-end → Sheet kommer nerifrån (bottom sheet)
-// DESKTOP 768+: align-items: center  → Sheet centreras på skärmen
+// MOBILE (base): align-items: flex-end → Sheet slides in from below (bottom sheet)
+// DESKTOP 768+: align-items: center  → Sheet is centered on screen
 const Backdrop = styled.div`
-  /* MOBIL: modal glider upp nerifrån */
+  /* MOBILE: modal slides up from below */
   position: fixed;
   inset: 0;
   background: rgba(0,0,0,0.65);
   backdrop-filter: blur(6px);
   z-index: 200;
   display: flex;
-  align-items: flex-end; /* bottom sheet på mobil */
+  align-items: flex-end; /* bottom sheet on mobile */
   justify-content: center;
   animation: ${fadeIn} 0.2s ease both;
 
-  /* DESKTOP 768+: centrerad modal */
+  /* DESKTOP 768+: centered modal */
   @media (min-width: 768px) {
     align-items: center;
   }
 `;
 
 
-// ─── BEKRÄFTELSE-DIALOG (TA BORT) ─────────────────────────────────────────────
-// Visas när användaren trycker papperskorgen.
-// Kräver ett extra klick för att bekräfta — förhindrar misstag.
+// ─── CONFIRM DIALOG (DELETE) ─────────────────────────────────────────────────
+// Shown when the user presses the trash icon.
+// Requires an extra click to confirm — prevents mistakes.
 //
-// MOBIL (bas):  bottom sheet (inga rundade underhörn)
-// DESKTOP 768+: centrerad dialog med rundade hörn runt om
+// MOBILE (base): bottom sheet (no rounded lower corners)
+// DESKTOP 768+: centered dialog with rounded corners all around
 const ConfirmSheet = styled.div`
-  /* MOBIL: bottom sheet stil */
+  /* MOBILE: bottom sheet style */
   background: #0d3d45;
   border: 1px solid rgba(255,138,125,0.25);
-  border-radius: 20px 20px 0 0; /* rundade hörn bara uppåt */
+  border-radius: 20px 20px 0 0; /* rounded corners only at the top */
   padding: 1.6rem 1.4rem 2.2rem;
   width: 100%;
   max-width: 400px;
   animation: ${slideUp} 0.3s ease both;
   text-align: center;
 
-  /* DESKTOP 768+: dialog centreras med rundade hörn runt om */
+  /* DESKTOP 768+: dialog centered with rounded corners all around */
   @media (min-width: 768px) {
     border-radius: 20px;
     margin: 1rem;
@@ -439,14 +439,14 @@ const DeleteConfirmBtn = styled.button`
 `;
 
 
-// ─── BOTTOM SHEET / MODAL (LÄGG TILL & REDIGERA) ─────────────────────────────
-// Samma Sheet-komponent används för båda lägena.
-// modalMode ('add' | 'edit') styr rubrik och knapp-text.
+// ─── BOTTOM SHEET / MODAL (ADD & EDIT) ───────────────────────────────────────
+// The same Sheet component is used for both modes.
+// modalMode ('add' | 'edit') controls heading and button text.
 //
-// MOBIL (bas):  bottom sheet, glider upp nerifrån
-// DESKTOP 768+: centrerad dialog
+// MOBILE (base): bottom sheet, slides up from below
+// DESKTOP 768+: centered dialog
 const Sheet = styled.div`
-  /* MOBIL: full bredd, bottom sheet */
+  /* MOBILE: full width, bottom sheet */
   background: #0d3d45;
   border: 1px solid rgba(255,255,255,0.15);
   border-radius: 20px 20px 0 0;
@@ -455,7 +455,7 @@ const Sheet = styled.div`
   max-width: 500px;
   animation: ${slideUp} 0.3s ease both;
 
-  /* DESKTOP 768+: centrerad modal */
+  /* DESKTOP 768+: centered modal */
   @media (min-width: 768px) {
     border-radius: 24px;
     margin: 1rem;
@@ -463,17 +463,17 @@ const Sheet = styled.div`
   }
 `;
 
-// Litet handtag längst upp — konvention för bottom sheets på mobil.
-// Döljs på desktop eftersom det inte är ett bottom sheet där.
+// Small handle at the top — convention for bottom sheets on mobile.
+// Hidden on desktop since it is not a bottom sheet there.
 const SheetHandle = styled.div`
-  /* MOBIL: synligt handtag */
+  /* MOBILE: visible handle */
   width: 36px;
   height: 3px;
   background: rgba(255,255,255,0.2);
   border-radius: 2px;
   margin: 0 auto 1.5rem;
 
-  /* DESKTOP 768+: döljs */
+  /* DESKTOP 768+: hidden */
   @media (min-width: 768px) {
     display: none;
   }
@@ -501,38 +501,38 @@ const FieldLabel = styled.label`
   margin-bottom: 0.45rem;
 `;
 
-// Textfält och tidsfält i formuläret.
-// automatiskt vid fokus — under 16px triggas auto-zoom.
-// -webkit-appearance: none tar bort iOS standardstilar (border, shadow etc.)
+// Text fields and time fields in the form.
+// automatically on focus — below 16px auto-zoom is triggered.
+// -webkit-appearance: none removes iOS default styles (border, shadow etc.)
 const FieldInput = styled.input`
-  /* MOBIL: stor nog för att undvika iOS auto-zoom */
+  /* MOBILE: large enough to avoid iOS auto-zoom */
   width: 100%;
   background: rgba(255,255,255,0.08);
   border: 1px solid rgba(255,255,255,0.15);
   border-radius: 10px;
-  padding: 0.85rem 1rem;  /* touch-vänlig höjd */
-  font-size: 1rem;         /* 16px = iOS-gränsen för auto-zoom */
+  padding: 0.85rem 1rem;  /* touch-friendly height */
+  font-size: 1rem;         /* 16px = iOS threshold for auto-zoom */
   color: #fff;
   outline: none;
   transition: border-color 0.2s;
-  -webkit-appearance: none; /* tar bort iOS standardstilar */
+  -webkit-appearance: none; /* removes iOS default styles */
 
   &::placeholder { color: rgba(255,255,255,0.22); }
   &:focus { border-color: rgba(125,255,212,0.5); }
 `;
 
-// Rad med dag-knappar (M T O T F L S)
-// Inga responsiva skillnader — fungerar bra på alla skärmar
+// Row of day buttons (M T W T F S S)
+// No responsive differences — works well on all screens
 const DayRow = styled.div`
   display: flex;
   gap: 0.4rem;
 `;
 
-// Dag-knapp. $active styr grön (vald) eller grå (ej vald) stil.
-// flex: 1 gör att alla sju knappar tar lika mycket plats.
-// Lite större padding på mobil för enklare touch.
+// Day button. $active controls green (selected) or grey (unselected) style.
+// flex: 1 makes all seven buttons take equal space.
+// Slightly larger padding on mobile for easier touch.
 const DayToggle = styled.button`
-  /* MOBIL: generös touch-yta */
+  /* MOBILE: generous touch area */
   flex: 1;
   padding: 0.65rem 0;
   border-radius: 8px;
@@ -546,13 +546,13 @@ const DayToggle = styled.button`
 
   &:active { transform: scale(0.95); }
 
-  /* DESKTOP 768+: kompaktare padding */
+  /* DESKTOP 768+: more compact padding */
   @media (min-width: 768px) {
     padding: 0.55rem 0;
   }
 `;
 
-// Spara-knapp längst ner i formuläret
+// Save button at the bottom of the form
 const SaveBtn = styled.button`
   width: 100%;
   background: rgba(255,255,255,0.92);
@@ -572,7 +572,7 @@ const SaveBtn = styled.button`
   &:active { transform: scale(0.98); }
 `;
 
-// Avbryt-knapp — diskret textstil
+// Cancel button — subtle text style
 const CancelBtn = styled.button`
   width: 100%;
   background: transparent;
@@ -589,8 +589,8 @@ const CancelBtn = styled.button`
 `;
 
 
-// ─── TOM-STATE ────────────────────────────────────────────────────────────────
-// Visas när medicines-listan är tom.
+// ─── EMPTY STATE ──────────────────────────────────────────────────────────────
+// Shown when the medicines list is empty.
 const EmptyState = styled.div`
   text-align: center;
   padding: 3rem 1rem;
@@ -620,26 +620,26 @@ const EmptySub = styled.p`
 `;
 
 
-// ─── KONSTANTER OCH HJÄLPFUNKTIONER ──────────────────────────────────────────
+// ─── CONSTANTS AND HELPER FUNCTIONS ──────────────────────────────────────────
 
-// Svenska förkortningar för dag-toggle-knapparna
+// Swedish abbreviations for the day toggle buttons
 const DAY_NAMES = ['Mån', 'Tis', 'Ons', 'Tor', 'Fre', 'Lör', 'Sön'];
 
-// Returnerar dagens namn på svenska. getDay() ger 0 (sön) – 6 (lör).
+// Returns today's name in Swedish. getDay() returns 0 (Sun) – 6 (Sat).
 const getTodayName = () => {
   const names = ['Söndag', 'Måndag', 'Tisdag', 'Onsdag', 'Torsdag', 'Fredag', 'Lördag'];
   return names[new Date().getDay()];
 };
 
-// Returnerar datumet formaterat på svenska, t.ex. "26 februari"
+// Returns the date formatted in Swedish, e.g. "26 februari"
 const getDateString = () =>
   new Date().toLocaleDateString('sv-SE', { day: 'numeric', month: 'long' });
 
-// Tomt formulär — används för att återställa vid öppna/stäng
+// Empty form — used to reset on open/close
 const EMPTY_FORM = { name: '', dose: '', time: '08:00' };
 
-// Återanvändbar hjälpfunktion för toast-stilar.
-// Tar emot valfri border-färg och textfärg så varje typ ser olika ut.
+// Reusable helper function for toast styles.
+// Accepts an optional border colour and text colour so each type looks different.
 const toastStyle = (
   border = 'rgba(255,255,255,0.15)',
   color  = 'rgba(255,255,255,0.9)'
@@ -656,38 +656,38 @@ const toastStyle = (
 });
 
 
-// ─── HUVUDKOMPONENT ───────────────────────────────────────────────────────────
+// ─── MAIN COMPONENT ───────────────────────────────────────────────────────────
 const MedicinPage = () => {
 
   // ── STATE ────────────────────────────────────────────────────────────────
-  // Listan med mediciner. Varje objekt:
+  // The list of medicines. Each object:
   //   id, name, dose, time ("HH:MM"), days ([0-6]), taken (bool), takenAt (str|null)
   const [medicines, setMedicines] = useState([
     /* { id: 1, name: 'Waran',   dose: '5 mg',  time: '08:00', days: [0,1,2,3,4,5,6], taken: true,  takenAt: '08:14' },
     { id: 2, name: 'Xarelto', dose: '20 mg', time: '20:00', days: [0,1,2,3,4,5,6], taken: false, takenAt: null }, */
   ]);
 
-  // null = stängd, 'add' = lägg till, 'edit' = redigera
+  // null = closed, 'add' = add, 'edit' = edit
   const [modalMode, setModalMode] = useState(null);
 
-  // ID för medicinen som redigeras (null om ingen redigeras)
+  // ID of the medicine being edited (null if none being edited)
   const [editingId, setEditingId] = useState(null);
 
-  // ID för medicinen vars ta bort-dialog visas (null om ingen)
+  // ID of the medicine whose delete dialog is shown (null if none)
   const [confirmId, setConfirmId] = useState(null);
 
-  // Valda veckodagar i formuläret (array med index 0-6)
+  // Selected weekdays in the form (array with indices 0-6)
   const [activeDays, setActiveDays] = useState([0,1,2,3,4,5,6]);
 
-  // Formulärdata
+  // Form data
   const [form, setForm] = useState(EMPTY_FORM);
 
-  // ── BERÄKNADE VÄRDEN ─────────────────────────────────────────────────────
+  // ── COMPUTED VALUES ─────────────────────────────────────────────────────
   const takenCount     = medicines.filter(m => m.taken).length;
   const remainingCount = medicines.filter(m => !m.taken).length;
 
 
-  // ── ÖPPNA "LÄGG TILL"-MODAL ───────────────────────────────────────────────
+  // ── OPEN "ADD" MODAL ───────────────────────────────────────────────────
   const openAdd = () => {
     setForm(EMPTY_FORM);
     setActiveDays([0,1,2,3,4,5,6]);
@@ -695,8 +695,8 @@ const MedicinPage = () => {
     setModalMode('add');
   };
 
-  // ── ÖPPNA "REDIGERA"-MODAL ────────────────────────────────────────────────
-  // Fyller formuläret med befintliga värden och sätter editingId
+  // ── OPEN "EDIT" MODAL ──────────────────────────────────────────────────
+  // Fills the form with existing values and sets editingId
   const openEdit = (med) => {
     setForm({ name: med.name, dose: med.dose, time: med.time });
     setActiveDays(med.days);
@@ -704,19 +704,19 @@ const MedicinPage = () => {
     setModalMode('edit');
   };
 
-  // ── STÄNG MODAL ───────────────────────────────────────────────────────────
+  // ── CLOSE MODAL ───────────────────────────────────────────────────────────
   const closeModal = () => {
     setModalMode(null);
     setEditingId(null);
   };
 
 
-  // ── SPARA (NY ELLER UPPDATERING) ─────────────────────────────────────────
+  // ── SAVE (NEW OR UPDATE) ─────────────────────────────────────────────────
   const saveMedicine = () => {
     if (!form.name.trim()) return;
 
     if (modalMode === 'edit') {
-      // map() returnerar ny array där bara rätt medicin är ändrad
+      // map() returns a new array where only the right medicine is changed
       setMedicines(prev => prev.map(m =>
         m.id === editingId
           ? { ...m, name: form.name, dose: form.dose, time: form.time, days: activeDays }
@@ -727,13 +727,13 @@ const MedicinPage = () => {
 
     } else {
       const newMed = {
-        id: Date.now(), // unikt ID via tidsstämpel
+        id: Date.now(), // unique ID via timestamp
         name: form.name, dose: form.dose, time: form.time,
         days: activeDays, taken: false, takenAt: null,
       };
       setMedicines(prev => [...prev, newMed]);
 
-      // Schemalägg toast-påminnelse om vald tid är senare idag
+      // Schedule toast reminder if selected time is later today
       const [h, min] = form.time.split(':').map(Number);
       const triggerTime = new Date();
       triggerTime.setHours(h, min, 0, 0);
@@ -753,7 +753,7 @@ const MedicinPage = () => {
   };
 
 
-  // ── MARKERA SOM TAGEN / OTAGEN ────────────────────────────────────────────
+  // ── MARK AS TAKEN / UNTAKEN ──────────────────────────────────────────────
   const toggleTaken = (id) => {
     setMedicines(prev => prev.map(m => {
       if (m.id !== id) return m;
@@ -768,8 +768,8 @@ const MedicinPage = () => {
   };
 
 
-  // ── TA BORT ───────────────────────────────────────────────────────────────
-  // filter() returnerar alla mediciner UTOM den med confirmId
+  // ── DELETE ───────────────────────────────────────────────────────────────
+  // filter() returns all medicines EXCEPT the one with confirmId
   const deleteMedicine = () => {
     const med = medicines.find(m => m.id === confirmId);
     setMedicines(prev => prev.filter(m => m.id !== confirmId));
@@ -779,7 +779,7 @@ const MedicinPage = () => {
   };
 
 
-  // ── TOGGA VECKODAG ────────────────────────────────────────────────────────
+  // ── TOGGLE WEEKDAY ────────────────────────────────────────────────────────
   const toggleDay = (i) =>
     setActiveDays(prev =>
       prev.includes(i) ? prev.filter(d => d !== i) : [...prev, i]
@@ -797,7 +797,7 @@ const MedicinPage = () => {
 
         <ScrollArea>
 
-          {/* Dagsstatus */}
+          {/* Day status */}
           <DayHeader>
             <DayLabel>{getDateString()}</DayLabel>
             <DayTitle>
@@ -811,7 +811,7 @@ const MedicinPage = () => {
 
           <SectionTitle>Idag</SectionTitle>
 
-          {/* Tom-state eller medicin-lista */}
+          {/* Empty state or medicine list */}
           {medicines.length === 0 ? (
             <EmptyState>
               <EmptyIcon><PillIcon /></EmptyIcon>
@@ -819,11 +819,11 @@ const MedicinPage = () => {
               <EmptySub>Tryck på knappen nedan för att lägga till din första medicin</EmptySub>
             </EmptyState>
           ) : (
-            // $delay förskjuter animationen per kort → sekventiell inglid
+            // $delay staggers the animation per card → sequential slide-in
             medicines.map((med, i) => (
               <MedCard key={med.id} $taken={med.taken} $delay={`${i * 0.08}s`}>
 
-                {/* Checkknapp — togglar tagen/otagen */}
+                {/* Check button — toggles taken/untaken */}
                 <CheckBtn $taken={med.taken} onClick={() => toggleTaken(med.id)}>
                   {med.taken
                     ? <CheckIcon color="rgba(125,255,212,0.9)" />
@@ -831,13 +831,13 @@ const MedicinPage = () => {
                   }
                 </CheckBtn>
 
-                {/* Namn + dos — klick öppnar redigera-modalen */}
+                {/* Name + dose — click opens the edit modal */}
                 <MedInfo onClick={() => openEdit(med)}>
                   <MedName $taken={med.taken}>{med.name}</MedName>
                   <MedDose>{med.dose}</MedDose>
                 </MedInfo>
 
-                {/* Höger kolumn */}
+                {/* Right column */}
                 <MedRight>
                   <MedTime $taken={med.taken}>
                     {med.taken ? '✓ Tagen' : `kl ${med.time}`}
@@ -858,7 +858,7 @@ const MedicinPage = () => {
             ))
           )}
 
-          {/* Imorgon-sektion */}
+          {/* Tomorrow section */}
           {medicines.length > 0 && (
             <>
               <SectionTitle>Imorgon</SectionTitle>
@@ -874,7 +874,7 @@ const MedicinPage = () => {
 
         </ScrollArea>
 
-        {/* Fast Lägg till-knapp */}
+        {/* Fixed Add button */}
         <AddBtnWrap>
           <AddBtn onClick={openAdd}>
             <PlusIcon />
@@ -886,7 +886,7 @@ const MedicinPage = () => {
       </Card>
 
 
-      {/* ── LÄGG TILL / REDIGERA MODAL ── */}
+      {/* ── ADD / EDIT MODAL ── */}
       {modalMode && (
         <Backdrop onClick={(e) => e.target === e.currentTarget && closeModal()}>
           <Sheet>
@@ -950,7 +950,7 @@ const MedicinPage = () => {
       )}
 
 
-      {/* ── BEKRÄFTELSE-DIALOG (TA BORT) ── */}
+      {/* ── CONFIRM DIALOG (DELETE) ── */}
       {confirmId && (
         <Backdrop onClick={(e) => e.target === e.currentTarget && setConfirmId(null)}>
           <ConfirmSheet>
@@ -970,7 +970,7 @@ const MedicinPage = () => {
 };
 
 
-// ─── SVG-IKONER ───────────────────────────────────────────────────────────────
+// ─── SVG ICONS ───────────────────────────────────────────────────────────────
 
 const CheckIcon = ({ color = 'white' }) => (
   <svg width="14" height="14" viewBox="0 0 14 14" fill="none">

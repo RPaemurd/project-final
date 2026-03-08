@@ -322,9 +322,7 @@ const ProfilPage = () => {
           </QuickCard>
         </QuickGrid>
 
-
         <Divider />
-
 
         <SectionLabel>Kontoinformation</SectionLabel>
         <AccountCard>
@@ -337,9 +335,7 @@ const ProfilPage = () => {
           </AccountRow>
         </AccountCard>
 
-
         <Divider />
-
 
         <SectionLabel>Inställningar</SectionLabel>
         <ActionList>
@@ -373,7 +369,6 @@ const ProfilPage = () => {
           </ActionBtn>
 
         </ActionList>
-
 
         <SectionLabel>Farlig zon</SectionLabel>
         <DeleteBtn onClick={() => {}}> {/* will do later */}

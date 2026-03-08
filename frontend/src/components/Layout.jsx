@@ -28,7 +28,7 @@ export const Frame = styled.div`
   align-items: center;
   justify-content: center;
 
-  /* mobil: ingen padding, kortet fyller hela skärmen */
+  /* mobile: no padding, the card fills the entire screen */
   padding: 0;
   background: ${theme.colors.dark};
 
@@ -46,7 +46,7 @@ export const Card = styled.main`
   display: flex;
   flex-direction: column;
 
-  /* mobil: inga rundade hörn, fyller hela skärmen */
+  /* mobile: no rounded corners, fills the entire screen */
   border-radius: 0;
   box-shadow: none;
 
@@ -82,7 +82,7 @@ export const Card = styled.main`
   }
 `;
 
-// ─── Corner labels — bara synliga på desktop ──────────────────
+// ─── Corner labels — only visible on desktop ──────────────────
 export const CornerLabel = styled.span`
   display: none;
 

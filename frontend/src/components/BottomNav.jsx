@@ -1,13 +1,13 @@
 // ─────────────────────────────────────────────────────────────────────────────
 // BottomNav.jsx
 //
-// Bottom navigation för app-sidor på mobil.
-// Visar tre stora knappar med ikon + text längst ner på skärmen.
-// Döljs på desktop (768px+) eftersom man navigerar via toppmeny/tillbaka-knapp.
+// Bottom navigation for app pages on mobile.
+// Shows three large buttons with icon + text at the bottom of the screen.
+// Hidden on desktop (768px+) since navigation is done via the top menu/back button.
 //
 // Används på: MedicinPage, SymptomCheckPage
 // Props:
-//   active = sträng med aktiv sida: 'hem' | 'medicin' | 'symptomkoll'
+//   active = string with active page: 'hem' | 'medicin' | 'symptomkoll'
 // ─────────────────────────────────────────────────────────────────────────────
 
 import React from 'react';
@@ -15,8 +15,8 @@ import styled from 'styled-components';
 import { theme } from '../styles/theme';
 
 // ─── Wrapper ──────────────────────────────────────────────────────────────────
-// Sitter fast längst ner på skärmen (position: fixed).
-// Döljs helt på desktop — där navigerar man via navbar istället.
+// Fixed at the bottom of the screen (position: fixed).
+// Hidden entirely on desktop — navigation is done via the navbar instead.
 const Bar = styled.nav`
   /* MOBIL: synlig, fast längst ner */
   position: fixed;
@@ -32,7 +32,7 @@ const Bar = styled.nav`
   backdrop-filter: blur(16px);
   border-top: 1px solid rgba(255,255,255,0.1);
 
-  /* Extra padding i botten för iPhone-notch/home indicator */
+  /* Extra padding at the bottom for iPhone notch/home indicator */
   padding-bottom: env(safe-area-inset-bottom, 0px);
 
   /* DESKTOP 768+: döljs */
@@ -41,9 +41,9 @@ const Bar = styled.nav`
   }
 `;
 
-// ─── Enskild nav-knapp ────────────────────────────────────────────────────────
-// flex: 1 gör att alla tre knappar tar exakt lika stor bredd.
-// $active styr om knappen är markerad (ljusgrön) eller inte (grå).
+// ─── Individual nav button ────────────────────────────────────────────────────
+// flex: 1 makes all three buttons take exactly equal width.
+// $active controls whether the button is highlighted (light green) or not (grey).
 const NavItem = styled.a`
   flex: 1;
   display: flex;
@@ -56,13 +56,13 @@ const NavItem = styled.a`
   color: ${({ $active }) => $active ? theme.colors.mint : 'rgba(255,255,255,0.45)'};
   transition: color 0.2s;
 
-  /* Liten highlight-linje längst upp på aktiv knapp */
+  /* Small highlight line at the top of the active button */
   border-top: 2px solid ${({ $active }) => $active ? theme.colors.mint : 'transparent'};
 
   &:active { opacity: 0.7; }
 `;
 
-// Ikonwrapper
+// Icon wrapper
 const Icon = styled.div`
   width: 24px;
   height: 24px;
@@ -71,14 +71,14 @@ const Icon = styled.div`
   justify-content: center;
 `;
 
-// Text under ikonen
+// Text below the icon
 const Label = styled.span`
   font-size: 0.68rem;
   font-weight: ${({ $active }) => $active ? '500' : '400'};
   letter-spacing: 0.02em;
 `;
 
-// ─── Komponent ────────────────────────────────────────────────────────────────
+// ─── Component ────────────────────────────────────────────────────────────────
 const BottomNav = ({ active = '' }) => (
   <Bar>
 

@@ -16,7 +16,7 @@ const SplitCard = styled.div`
   border-radius: 24px;        
   overflow: hidden;
 
-  /* mobil: ren gradient, inget split */
+  /* mobile: clean gradient, no split */
   background: linear-gradient(160deg, #1a6b76 0%, #0d4a52 100%);
 
   @media (min-width: 700px) {
@@ -29,7 +29,7 @@ const SplitCard = styled.div`
   }
 `;
 
-// ─── Vänster panel — bara desktop ────────────────────────────
+// ─── Left panel — desktop only ───────────────────────────────
 const LeftPanel = styled.div`
   display: none;
 
@@ -137,7 +137,7 @@ const TrustIcon = styled.div`
   flex-shrink: 0;
 `;
 
-// ─── Höger formpanel ──────────────────────────────────────────
+// ─── Right form panel ─────────────────────────────────────────
 const RightPanel = styled.div`
   flex: 1;
   display: flex;
@@ -175,7 +175,7 @@ const CloseBtn = styled.a`
   &:active { transform: scale(0.95); }
 `;
 
-// Mobil-logga — bara synlig på mobil ──────────────────────────
+// Mobile logo — only visible on mobile ────────────────────────
 const MobileLogo = styled.div`
   display: flex;
   align-items: center;
@@ -224,7 +224,7 @@ const Input = styled.input`
   border: 1px solid rgba(255,255,255,0.2);
   border-radius: 10px;
   padding: 0.9rem 1.1rem;
-  font-size: 1rem; /* 16px — förhindrar zoom på iOS */
+  font-size: 1rem; /* 16px — prevents zoom on iOS */
   font-weight: 400;
   color: #fff;
   outline: none;
@@ -363,7 +363,7 @@ const LoginPage = ({ onLogin }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const response = await fetch("http://localhost:8081/api/login", {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/api/login`, {
     
       method: "POST", 
       headers: {
@@ -388,7 +388,7 @@ const LoginPage = ({ onLogin }) => {
   const handleRegister = async (e) => {
     e.preventDefault();
 
-    const response = await fetch("http://localhost:8081/api/register", {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/api/register`, {
 
       method: "POST",
       headers: {
@@ -424,7 +424,7 @@ const LoginPage = ({ onLogin }) => {
         <CornerLabel pos="bl">Säker anslutning</CornerLabel>
         <CornerLabel pos="br">v0.1</CornerLabel>
 
-        {/* Vänster — bara desktop */}
+        {/* Left — desktop only */}
         <LeftPanel>
           <LogoWrap href="/">
             <LogoIcon>
@@ -445,9 +445,9 @@ const LoginPage = ({ onLogin }) => {
           </TrustBadges>
         </LeftPanel>
 
-        {/* Höger — formulär */}
+        {/* Right — form */}
         <RightPanel>
-          {/* Logga bara synlig på mobil */}
+          {/* Logo only visible on mobile */}
           <MobileLogo>
             <LogoIcon>
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none">

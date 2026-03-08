@@ -22,7 +22,7 @@ const ScrollArea = styled.div`
   }
 `;
 
-// ─── HERO-SEKTION ─────────────────────────────────────────────
+// ─── HERO SECTION ─────────────────────────────────────────────
 const Hero = styled.div`
   margin-bottom: 3rem;
   animation: ${fadeUp} 0.7s ease both;
@@ -72,14 +72,14 @@ const HeroText = styled.p`
   max-width: 520px;
 `;
 
-// ─── AVDELARE ─────────────────────────────────────────────────
+// ─── DIVIDER ──────────────────────────────────────────────────
 const Divider = styled.div`
   height: 1px;
   background: rgba(255,255,255,0.1);
   margin: 2.5rem 0;
 `;
 
-// ─── SEKTION-RUBRIK ───────────────────────────────────────────
+// ─── SECTION HEADING ──────────────────────────────────────────
 const SectionLabel = styled.div`
   font-size: 0.65rem;
   font-weight: 500;
@@ -89,7 +89,7 @@ const SectionLabel = styled.div`
   margin-bottom: 1rem;
 `;
 
-// ─── VÄRDE-KORT (de tre kort-kolumnerna) ─────────────────────
+// ─── VALUE CARDS (the three card columns) ────────────────────
 const CardGrid = styled.div`
   display: flex;
   flex-direction: column;
@@ -135,7 +135,7 @@ const ValueText = styled.div`
   line-height: 1.65;
 `;
 
-// ─── LÖPTEXT-SEKTION ──────────────────────────────────────────
+// ─── BODY TEXT SECTION ────────────────────────────────────────
 const TextSection = styled.div`
   margin-bottom: 2.5rem;
   animation: ${fadeUp} 0.6s 0.2s ease both;
@@ -160,7 +160,7 @@ const BodyText = styled.p`
   margin-bottom: 0.9rem;
 `;
 
-// ─── TEAM-SEKTION ─────────────────────────────────────────────
+// ─── TEAM SECTION ─────────────────────────────────────────────
 const TeamGrid = styled.div`
   display: flex;
   flex-direction: column;
@@ -212,7 +212,7 @@ const TeamRole = styled.div`
   color: rgba(255,255,255,0.45);
 `;
 
-// ─── STATISTIK-RAD ────────────────────────────────────────────
+// ─── STATS ROW ────────────────────────────────────────────────
 const StatsRow = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -248,7 +248,7 @@ const StatLabel = styled.div`
   letter-spacing: 0.04em;
 `;
 
-// ─── CTA-KORT ─────────────────────────────────────────────────
+// ─── CTA CARD ─────────────────────────────────────────────────
 const CtaCard = styled.div`
   background: rgba(125,255,212,0.07);
   border: 1px solid rgba(125,255,212,0.2);
@@ -343,7 +343,7 @@ const OmOssPage = () => (
 
         <Divider />
 
-        {/* Vad vi erbjuder */}
+        {/* What we offer */}
         <TextSection>
           <SectionLabel>Vad vi erbjuder</SectionLabel>
           <SectionTitle>Tre <em>pelare</em></SectionTitle>
@@ -397,8 +397,8 @@ const OmOssPage = () => (
             komplement till den svenska vården — aldrig en ersättning.
           </BodyText>
           <BodyText>
-            {/* All medicinsk information är granskad och baseras på Socialstyrelsens
-            och 1177:s riktlinjer. */} Vi är alltid transparenta med vad appen kan
+            {/* All medical information is reviewed and based on the National Board of Health's
+            and 1177's guidelines. */} Vi är alltid transparenta med vad appen kan
             och inte kan — den ställer inga diagnoser.
           </BodyText>
         </TextSection>

@@ -4,7 +4,7 @@ import { Frame, Card, CornerLabel, fadeUp } from '../components/Layout.jsx';
 import Navbar from '../components/Navbar.jsx';
 import { theme } from '../styles/theme.js';
 
-// ─── ANIMATIONER ─────────────────────────────────────────────
+// ─── ANIMATIONS ──────────────────────────────────────────────
 const slideDown = keyframes`
   from { opacity: 0; transform: translateY(-6px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -73,7 +73,7 @@ const HeroText = styled.p`
   max-width: 480px;
 `;
 
-// ─── KATEGORI-ETIKETT ──────────────────────────────────────────
+// ─── CATEGORY LABEL ────────────────────────────────────────────
 const CategoryLabel = styled.div`
   font-size: 0.65rem;
   font-weight: 500;
@@ -93,8 +93,8 @@ const CategoryLabel = styled.div`
   }
 `;
 
-// ─── FAQ-ACCORDION-KORT ───────────────────────────────────────
-// $open styr om svaret är synligt eller inte.
+// ─── FAQ ACCORDION CARD ───────────────────────────────────────
+// $open controls whether the answer is visible or not.
 const FaqCard = styled.div`
   background: rgba(0,0,0,0.22);
   border: 1px solid ${({ $open }) => $open ? 'rgba(255,255,255,0.2)' : 'rgba(255,255,255,0.1)'};
@@ -105,7 +105,7 @@ const FaqCard = styled.div`
   animation: ${fadeUp} 0.5s ${({ $delay }) => $delay || '0s'} ease both;
 `;
 
-// Klickbar rubrikrad
+// Clickable header row
 const FaqQuestion = styled.button`
   width: 100%;
   display: flex;
@@ -130,7 +130,7 @@ const QuestionText = styled.span`
   }
 `;
 
-// Roterande pil-ikon
+// Rotating arrow icon
 const Chevron = styled.span`
   display: flex;
   align-items: center;
@@ -142,9 +142,9 @@ const Chevron = styled.span`
   transition: transform 0.25s ease;
 `;
 
-// Svar-text — döljs/visas med en height-animation via max-height
+// Answer text — hidden/shown with a height animation via max-height
 const FaqAnswer = styled.div`
-  /* max-height trick: 0 = döljs, stort värde = visas */
+  /* max-height trick: 0 = hidden, large value = visible */
   max-height: ${({ $open }) => $open ? '400px' : '0'};
   overflow: hidden;
   transition: max-height 0.35s ease;
@@ -161,7 +161,7 @@ const AnswerInner = styled.div`
   animation: ${({ $open }) => $open ? slideDown : 'none'} 0.3s ease both;
 `;
 
-// ─── KONTAKT-KORT ─────────────────────────────────────────────
+// ─── CONTACT CARD ─────────────────────────────────────────────
 const ContactCard = styled.div`
   background: rgba(255,217,125,0.07);
   border: 1px solid rgba(255,217,125,0.2);
@@ -214,9 +214,9 @@ const ContactBtn = styled.a`
   &:active { transform: scale(0.97); }
 `;
 
-// ─── FAQ-DATA ─────────────────────────────────────────────────
-// Kategorier med frågor och svar.
-// Ingen data hämtas från API — allt är hårdkodat här i filen.
+// ─── FAQ DATA ─────────────────────────────────────────────────
+// Categories with questions and answers.
+// No data is fetched from an API — everything is hardcoded in this file.
 const FAQ_DATA = [
   {
     category: 'Om appen',
@@ -284,11 +284,11 @@ const FAQ_DATA = [
   },
 ];
 
-// ─── ACCORDION-KOMPONENT ──────────────────────────────────────
-// En enkel accordion-komponent som hanterar sitt eget open/closed-state.
-// Separerad från FaqPage för att hålla koden ren.
+// ─── ACCORDION COMPONENT ──────────────────────────────────────
+// A simple accordion component that manages its own open/closed state.
+// Separated from FaqPage to keep the code clean.
 const FaqItem = ({ question, answer, delay }) => {
-  // open-state: styr om svaret är synligt
+  // open state: controls whether the answer is visible
   const [open, setOpen] = useState(false);
 
   return (

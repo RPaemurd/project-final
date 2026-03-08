@@ -16,18 +16,18 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Session-hantering
-// secret: en hemlig nyckel som krypterar sessionen
-// resave: spara inte sessionen om inget ändrats
-// saveUninitialized: spara inte tomma sessioner
+// Session management
+// secret: a secret key that encrypts the session
+// resave: do not save the session if nothing has changed
+// saveUninitialized: do not save empty sessions
  app.use(session({
   secret: process.env.SESSION_SECRET || 'secret-key',
   resave: false,
   saveUninitialized: false,
 })); 
 
-//berättar för express att alla routes i auth.js ska börja med api
-//register bli /api/register
+// tells express that all routes in auth.js should start with /api
+// register becomes /api/register
 app.use("/api", authRoutes);
 
 app.use

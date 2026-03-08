@@ -70,7 +70,7 @@ const HeroText = styled.p`
 `;
 
 
-// ─── AVDELARE ─────────────────────────────────────────────────────────────────
+// ─── DIVIDER ──────────────────────────────────────────────────────────────────
 const Divider = styled.div`
   height: 1px;
   background: rgba(255,255,255,0.1);
@@ -78,7 +78,7 @@ const Divider = styled.div`
 `;
 
 
-// ─── SEKTION-ETIKETT ──────────────────────────────────────────────────────────
+// ─── SECTION LABEL ────────────────────────────────────────────────────────────
 const SectionLabel = styled.div`
   font-size: 0.65rem;
   font-weight: 500;
@@ -109,7 +109,7 @@ const SectionTitle = styled.h2`
 `;
 
 
-// ─── STEG-KORT ────────────────────────────────────────────────────────────────
+// ─── STEP CARDS ───────────────────────────────────────────────────────────────
 const StepList = styled.div`
   display: flex;
   flex-direction: column;
@@ -156,7 +156,7 @@ const StepText = styled.div`
 `;
 
 
-// ─── FUNKTIONS-KORT ───────────────────────────────────────────────────────────
+// ─── FEATURE CARDS ────────────────────────────────────────────────────────────
 const FeatureGrid = styled.div`
   display: flex;
   flex-direction: column;
@@ -205,7 +205,7 @@ const FeatureText = styled.div`
 `;
 
 
-// ─── INFO-RUTA ────────────────────────────────────────────────────────────────
+// ─── INFO BOX ─────────────────────────────────────────────────────────────────
 const InfoBox = styled.div`
   background: rgba(255,217,125,0.07);
   border: 1px solid rgba(255,217,125,0.25);
@@ -236,7 +236,7 @@ const InfoText = styled.div`
 `;
 
 
-// ─── CTA-KORT ─────────────────────────────────────────────────────────────────
+// ─── CTA CARD ─────────────────────────────────────────────────────────────────
 const CtaCard = styled.div`
   background: rgba(125,255,212,0.07);
   border: 1px solid rgba(125,255,212,0.2);
@@ -312,7 +312,7 @@ const HurDetFungerarPage = () => (
         </Hero>
 
 
-        {/* Steg-för-steg */}
+        {/* Step-by-step */}
         <SectionLabel>Steg-för-steg</SectionLabel>
         <SectionTitle>Så här <em>börjar du</em></SectionTitle>
 

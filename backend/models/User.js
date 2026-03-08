@@ -5,16 +5,16 @@ const userSchema = new mongoose.Schema({
      email: {
         type: String,
         required: true,
-        unique: true, //ingen får ha samma email
-        lowercase: true, // sparas med små bokstäver
+        unique: true, //noone gets the same email
+        lowercase: true, // saves with small letters
     },
         password:{ 
         type: String,
         required: true
     }
-}, { timestamps: true} //lägger automatiskt till createdAT och updatedAt
+}, { timestamps: true} //automatic adds createdAT and updatedAt
 ); 
-//Skapar en user modell baserat på schemat
+//creates a user modell based on schema
 const User = mongoose.model("User", userSchema)
 
 
