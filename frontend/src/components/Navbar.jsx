@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { theme } from '../styles/theme';
 import { useLocation } from 'react-router-dom';
+import { useWindowSize } from "usehooks-ts";
 
 // ─── Styles ───────────────────────────────────────────────────
 const Nav = styled.nav`
@@ -218,6 +219,9 @@ const Navbar = ({ variant = 'default', user = null, logoHref = '/' }) => {
   const toggleMenu = () => setMenuOpen(prev => !prev);
   const closeMenu  = () => setMenuOpen(false);
 
+  const { width } = useWindowSize();
+  const isMobile = width < 768;
+
   return (
     <>
       <Nav>
@@ -230,18 +234,20 @@ const Navbar = ({ variant = 'default', user = null, logoHref = '/' }) => {
           <LogoText>Stoppa Proppen</LogoText>
         </LogoWrap>
 
-        {variant === 'default' && (
-          <>
-            <NavLinks>
-              <li><NavLink href="/">Hem</NavLink></li>
-              <li><NavLink href="/medicin">Medicinkoll</NavLink></li>
-              <li><NavLink href="/oss">Om oss</NavLink></li>
-              <li><NavLink href="/hurdetfungerar">Hur det fungerar</NavLink></li>
-              <li><NavLink href="/faq">FAQ</NavLink></li>
-            </NavLinks>
-            <NavCta href="/login">Kom igång</NavCta>
-          </>
-        )}
+        {/* NavLinks visas bara på desktop — inuti Nav */}
+      {!isMobile && variant === 'default' && (
+        <NavLinks>
+          <li><NavLink href="/">Hem</NavLink></li>
+          <li><NavLink href="/medicin">Medicinkoll</NavLink></li>
+          <li><NavLink href="/oss">Om oss</NavLink></li>
+          <li><NavLink href="/hurdetfungerar">Hur det fungerar</NavLink></li>
+          <li><NavLink href="/faq">FAQ</NavLink></li>
+        </NavLinks>
+      )}
+
+      {!isMobile && variant === 'default' && (
+        <NavCta href="/login">Kom igång</NavCta>
+      )}
 
         {variant === 'app' && user && (
           <> 
@@ -259,18 +265,17 @@ const Navbar = ({ variant = 'default', user = null, logoHref = '/' }) => {
         )}
       </Nav>
 
-      {/* Hamburger on mobile — outside Nav to avoid its stacking context */}
-      {variant === 'default' && (
-        <HamburgerBtn onClick={toggleMenu}
-          aria-label={menuOpen ? 'Stäng meny' : 'Öppna meny'}>
-          <HamburgerLine $open={menuOpen} />
-          <HamburgerLine $open={menuOpen} />
-          <HamburgerLine $open={menuOpen} />
-        </HamburgerBtn>
-      )}
+       {isMobile && variant === 'default' && (
+      <HamburgerBtn onClick={toggleMenu}>
+        <HamburgerLine $open={menuOpen} />
+        <HamburgerLine $open={menuOpen} />
+        <HamburgerLine $open={menuOpen} />
+      </HamburgerBtn>
+    )}
+     
 
       {/* Mobile drawer */}
-      {variant === 'default' && (
+      {isMobile && variant === 'default' && (
         <MobileMenu $open={menuOpen}>
           <MobileLink href="/" onClick={() => setMenuOpen(false)}>Hem</MobileLink>
           <MobileLink href="/oss" onClick={() => setMenuOpen(false)}>Om oss</MobileLink>
