@@ -334,7 +334,7 @@ const FaqPage = () => (
           </HeroText>
         </Hero>
 
-        {/* Accordion per kategori */}
+        {/* Accordion per category */}
         {FAQ_DATA.map((cat, ci) => (
           <div key={ci}>
             <CategoryLabel>{cat.category}</CategoryLabel>
@@ -349,7 +349,6 @@ const FaqPage = () => (
           </div>
         ))}
 
-        {/* Kontakt-kort längst ner */}
         <ContactCard>
           <ContactText>
             <ContactTitle>Hittade du inte svar?</ContactTitle>

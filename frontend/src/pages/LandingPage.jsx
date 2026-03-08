@@ -127,7 +127,7 @@ const BtnGhostLink = styled.a`
 // MOBILE (base): hidden — takes too much space on small screen
 // DESKTOP 768+: shown at the bottom of the card
 const Stats = styled.div`
-  /* MOBIL: döljs */
+  /* MOBIL: hidden */
  /*  display: none; */
   display: flex;
   justify-content: center;

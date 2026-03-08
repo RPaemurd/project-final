@@ -1,17 +1,13 @@
 import React, { useState } from 'react';
 import styled, { keyframes, css } from 'styled-components';
-
-// react-toastify: toast = triggers a notification, ToastContainer = must exist in the tree
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
-// Frame = outermost wrapper, Card = gradient card,
 import { Frame, Card, CornerLabel, fadeUp } from '../components/Layout.jsx';
 import Navbar from '../components/Navbar.jsx';
 import { theme } from '../styles/theme';
 import BottomNav from "../components/BottomNav.jsx"
 
-
+// react-toastify: toast = triggers a notification, ToastContainer = must exist in the tree
 // ─── ANIMATIONS ──────────────────────────────────────────────────────────────
 
 // Slides up from below — used on the medicine cards and modal sheet
@@ -38,9 +34,6 @@ const fadeIn = keyframes`
 // Contains the entire medicine list and is scrollable.
 // padding-bottom is large (7rem) so content is not hidden behind the fixed button.
 // The scrollbar is hidden visually for a cleaner mobile appearance.
-//
-// MOBILE (base): full width, less side padding
-// DESKTOP 768+: limited max-width and centered with margin: auto
 const ScrollArea = styled.div`
   /* MOBILE: full width, some padding on the sides */
   position: relative;
@@ -67,8 +60,6 @@ const ScrollArea = styled.div`
 // ─── DAY STATUS SECTION ───────────────────────────────────────────────────────
 // Shows date, weekday name and how many medicines are left.
 // No responsive differences here — works equally well on all screens.
-
-// Wrapper for the whole block, slides in on page load
 const DayHeader = styled.div`
   margin-bottom: 1.5rem;
   animation: ${fadeUp} 0.6s ease both;
@@ -107,7 +98,6 @@ const DaySubtext = styled.p`
 // ─── SECTION HEADING ───────────────────────────────────────────────────────────
 // The headings "Today" and "Tomorrow".
 // ::after creates the horizontal line to the right of the text.
-// No responsive differences.
 const SectionTitle = styled.div`
   font-size: 0.65rem;
   font-weight: 500;
@@ -131,9 +121,7 @@ const SectionTitle = styled.div`
 // ─── MEDICINE CARD ─────────────────────────────────────────────────────────────
 // $taken (boolean): controls green or neutral colour
 // $delay (string):   animation delay per card for sequential slide-in
-//
-// MOBILE (base): more compact padding
-// DESKTOP 768+: a little more space
+
 const MedCard = styled.div`
   /* MOBILE: compact padding */
   background: ${({ $taken }) => $taken ? 'rgba(125,255,212,0.08)' : 'rgba(0,0,0,0.25)'};
@@ -158,7 +146,6 @@ const MedCard = styled.div`
 
 // Round check button on the left.
 // $taken controls colour. The checkPop animation only plays when $taken is true.
-// Size is 40px on mobile (easier to tap) and 36px on desktop.
 const CheckBtn = styled.button`
   /* MOBILE: slightly larger for easier touch interaction */
   width: 40px;
@@ -238,10 +225,6 @@ const TakenTime = styled.div`
 
 // ─── ACTION BUTTONS (EDIT / DELETE) ─────────────────────────────────────────
 // $danger (boolean): false = neutral (pencil), true = red (trash)
-//
-// MOBILE (base): slightly larger (44px) for touch
-// DESKTOP 768+: standard (30px)
-
 const ActionRow = styled.div`
   display: flex;
   gap: 0.35rem;
@@ -277,10 +260,8 @@ const IconBtn = styled.button`
   }
 `;
 
-
 // ─── TOMORROW CARD ─────────────────────────────────────────────────────────────
 // Dimmed, informative cards without action buttons.
-// No responsive differences needed here.
 const TomorrowCard = styled.div`
   background: rgba(0,0,0,0.15);
   border: 1px solid rgba(255,255,255,0.08);
@@ -311,9 +292,7 @@ const TomorrowTime = styled.div`
   color: rgba(255,255,255,0.35);
 `;
 
-
 // The button is fixed at the bottom.
-
 const AddBtnWrap = styled.div`
   position: fixed;
   bottom: 4rem;
@@ -354,13 +333,9 @@ const AddBtn = styled.button`
   &:active { transform: scale(0.98); }
 `;
 
-
 // ─── MODAL BACKDROP ───────────────────────────────────────────────────────────
 // Covers the entire screen behind the modal.
-// Clicking the backdrop (not the Sheet) closes the modal via e.target check in JSX.
-//
-// MOBILE (base): align-items: flex-end → Sheet slides in from below (bottom sheet)
-// DESKTOP 768+: align-items: center  → Sheet is centered on screen
+
 const Backdrop = styled.div`
   /* MOBILE: modal slides up from below */
   position: fixed;
@@ -379,13 +354,9 @@ const Backdrop = styled.div`
   }
 `;
 
-
 // ─── CONFIRM DIALOG (DELETE) ─────────────────────────────────────────────────
 // Shown when the user presses the trash icon.
 // Requires an extra click to confirm — prevents mistakes.
-//
-// MOBILE (base): bottom sheet (no rounded lower corners)
-// DESKTOP 768+: centered dialog with rounded corners all around
 const ConfirmSheet = styled.div`
   /* MOBILE: bottom sheet style */
   background: #0d3d45;
@@ -442,9 +413,7 @@ const DeleteConfirmBtn = styled.button`
 // ─── BOTTOM SHEET / MODAL (ADD & EDIT) ───────────────────────────────────────
 // The same Sheet component is used for both modes.
 // modalMode ('add' | 'edit') controls heading and button text.
-//
-// MOBILE (base): bottom sheet, slides up from below
-// DESKTOP 768+: centered dialog
+
 const Sheet = styled.div`
   /* MOBILE: full width, bottom sheet */
   background: #0d3d45;
@@ -522,7 +491,6 @@ const FieldInput = styled.input`
 `;
 
 // Row of day buttons (M T W T F S S)
-// No responsive differences — works well on all screens
 const DayRow = styled.div`
   display: flex;
   gap: 0.4rem;
@@ -588,7 +556,6 @@ const CancelBtn = styled.button`
   }
 `;
 
-
 // ─── EMPTY STATE ──────────────────────────────────────────────────────────────
 // Shown when the medicines list is empty.
 const EmptyState = styled.div`
@@ -618,7 +585,6 @@ const EmptySub = styled.p`
   font-size: 0.8rem;
   color: rgba(255,255,255,0.3);
 `;
-
 
 // ─── CONSTANTS AND HELPER FUNCTIONS ──────────────────────────────────────────
 
@@ -785,8 +751,6 @@ const MedicinPage = () => {
       prev.includes(i) ? prev.filter(d => d !== i) : [...prev, i]
     );
 
-
-  // ── JSX ──────────────────────────────────────────────────────────────────
   return (
     <Frame>
       <Card>
@@ -885,7 +849,6 @@ const MedicinPage = () => {
         <ToastContainer />
       </Card>
 
-
       {/* ── ADD / EDIT MODAL ── */}
       {modalMode && (
         <Backdrop onClick={(e) => e.target === e.currentTarget && closeModal()}>
@@ -948,7 +911,6 @@ const MedicinPage = () => {
           </Sheet>
         </Backdrop>
       )}
-
 
       {/* ── CONFIRM DIALOG (DELETE) ── */}
       {confirmId && (

@@ -4,8 +4,6 @@
 // Bottom navigation for app pages on mobile.
 // Shows three large buttons with icon + text at the bottom of the screen.
 // Hidden on desktop (768px+) since navigation is done via the top menu/back button.
-//
-// Används på: MedicinPage, SymptomCheckPage
 // Props:
 //   active = string with active page: 'hem' | 'medicin' | 'symptomkoll'
 // ─────────────────────────────────────────────────────────────────────────────
@@ -42,7 +40,6 @@ const Bar = styled.nav`
 `;
 
 // ─── Individual nav button ────────────────────────────────────────────────────
-// flex: 1 makes all three buttons take exactly equal width.
 // $active controls whether the button is highlighted (light green) or not (grey).
 const NavItem = styled.a`
   flex: 1;

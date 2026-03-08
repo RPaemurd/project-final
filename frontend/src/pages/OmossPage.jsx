@@ -422,7 +422,6 @@ const OmOssPage = () => (
             <TeamAvatar $color="rgba(255,217,125,0.15)">M</TeamAvatar>
             <TeamInfo>
               <TeamName>Medicinsk rådgivare</TeamName>
-             {/*  <TeamRole>Legitimerad sjuksköterska</TeamRole> */}
             </TeamInfo>
           </TeamCard>
           <TeamCard $delay="0.16s">

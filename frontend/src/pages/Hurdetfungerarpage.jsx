@@ -362,11 +362,8 @@ const HurDetFungerarPage = () => (
           </StepCard>
         </StepList>
 
-
         <Divider />
 
-
-        {/* Funktioner */}
         <SectionLabel>Funktioner</SectionLabel>
         <SectionTitle>Vad du <em>kan göra</em></SectionTitle>
 
@@ -421,11 +418,8 @@ const HurDetFungerarPage = () => (
           </FeatureCard>
         </FeatureGrid>
 
-
         <Divider />
 
-
-        {/* Viktig info-ruta */}
         <InfoBox>
           <InfoIcon>⚠️</InfoIcon>
           <InfoText>
@@ -435,7 +429,6 @@ const HurDetFungerarPage = () => (
             svullnad i ett ben — ring <strong>112</strong> omedelbart.
           </InfoText>
         </InfoBox>
-
 
         {/* CTA */}
         <CtaCard>

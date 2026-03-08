@@ -367,7 +367,7 @@ const LoginPage = ({ onLogin }) => {
     
       method: "POST", 
       headers: {
-        "Content-Type": "application/json" //we are saying that we are sending json 
+        "Content-Type": "application/json" //we sending json 
       },
       body: JSON.stringify({
         email: email,
