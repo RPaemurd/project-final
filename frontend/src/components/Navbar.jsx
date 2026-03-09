@@ -253,8 +253,12 @@ const Navbar = ({ variant = 'default', user = null, logoHref = '/' }) => {
         <NavCta href="/login">Kom igång</NavCta>
       )}
 
+     {/*  {!isLoggedIn && (
+      <MobileCta href="/login" onClick={() => setMenuOpen(false)}>Kom igång gratis</MobileCta>
+      )} */}
+
       {!isMobile && variant === 'default' && isLoggedIn && (
-        <UserPill>
+        <UserPill as="a" href="/profil" style={{ textDecoration: "none", cursor: "pointer"}}>
           <Avatar>👤</Avatar>
           {storeUser?.email}
         </UserPill>
@@ -289,11 +293,14 @@ const Navbar = ({ variant = 'default', user = null, logoHref = '/' }) => {
       {isMobile && variant === 'default' && (
         <MobileMenu $open={menuOpen}>
           <MobileLink href="/" onClick={() => setMenuOpen(false)}>Hem</MobileLink>
+          <MobileLink href="/profil" onClick={() => setMenuOpen(false)}>Min Profil</MobileLink>
           <MobileLink href="/oss" onClick={() => setMenuOpen(false)}>Om oss</MobileLink>
           <MobileLink href="hurdetfungerar" onClick={() => setMenuOpen(false)}>Hur det fungerar</MobileLink>
           <MobileLink href="/faq" onClick={() => setMenuOpen(false)}>FAQ</MobileLink>
           <MobileLink href="/medicin" onClick={() => setMenuOpen(false)}>Medicinkoll</MobileLink>
+          {!isLoggedIn && ( 
           <MobileCta href="/login" onClick={() => setMenuOpen(false)}>Kom igång gratis</MobileCta>
+          )}
         </MobileMenu>
       )}
     </>
