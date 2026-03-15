@@ -301,7 +301,7 @@ const AddBtnWrap = styled.div`
   padding: 1rem 1.4rem 1.6rem;
 
   @media (min-width: 768px) {
-    bottom: 90rem;
+    bottom: 2rem;
     max-width: 640px;
     left: 50%;
     transform: translateX(-50%);
