@@ -33,11 +33,11 @@ app.use("/api", authRoutes);
 // Start the server
 mongoose.connect(mongoUrl)
   .then(() => {
-    console.log("✅ Succé! Vi har kontakt med MongoDB Atlas.");
+    console.log("✅ Succéss! We are conected to MongoDB Atlas.");
     app.listen(port, () => {
       console.log(`Server running on http://localhost:${port}`);
 });
   })
   .catch((err) => {
-    console.error("❌ Aj då, kunde inte ansluta till databasen:", err);
+    console.error("❌ Could not connect to the database:", err);
   });
