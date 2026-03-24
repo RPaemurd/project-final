@@ -1,19 +1,23 @@
 import mongoose from "mongoose";
+import crypto from "crypto";
 
 const userSchema = new mongoose.Schema({
 
-     email: {
+    email: {
         type: String,
         required: true,
-        unique: true, //noone gets the same email
-        lowercase: true, // saves with small letters
+        unique: true,
+        lowercase: true,
     },
-        password:{ 
+    password: {
         type: String,
         required: true
+    },
+    accessToken: {
+        type: String,
+        default: () => crypto.randomUUID()
     }
-}, { timestamps: true} //automatic adds createdAT and updatedAt
-); 
+}, { timestamps: true });
 //creates a user modell based on schema
 const User = mongoose.model("User", userSchema)
 

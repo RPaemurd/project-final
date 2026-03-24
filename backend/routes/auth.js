@@ -1,9 +1,22 @@
 import express from "express"
-import User from "../models/User.js" // we need this to save and retrieve users in MongoDB
+7import User from "../models/User.js" // we need this to save and retrieve users in MongoDB
 import bcrypt from "bcrypt";
 
-// mini server - only handles its own routes, instead of having all routes in server.js - we then connect it with the router in the main app
 const router = express.Router();
+
+// Middleware to protect routes — checks the Authorization header for a valid token
+export const authenticateUser = async (req, res, next) => {
+    const token = req.headers.authorization?.replace("Bearer ", "");
+    if (!token) {
+        return res.status(401).json({ message: "Ingen token angiven" });
+    }
+    const user = await User.findOne({ accessToken: token });
+    if (!user) {
+        return res.status(401).json({ message: "Ogiltig token" });
+    }
+    req.user = user;
+    next();
+};
 
 // async - means the route contains code that takes time (talking to the database)
 // without async/await we cannot wait for a response from MongoDB
@@ -66,12 +79,11 @@ router.post("/login", async (req, res) => {
     if(!isMatch){
     return res.status(401).json({ message: "Fel email eller lösenord"})
     }
-    // saves the user's id in the session
-    req.session.userId = user._id;
-    res.status(200).json({ 
-        message: 'Inloggad!', 
+    res.status(200).json({
+        message: 'Inloggad!',
         email: user.email,
-        id: user._id
+        id: user._id,
+        accessToken: user.accessToken
     });
 })
 
