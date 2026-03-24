@@ -281,8 +281,7 @@ const ProfilPage = () => {
   <Frame>
     <Card>
       <CornerLabel pos="tl">Profil</CornerLabel>
-{/*       <CornerLabel pos="tr">Stoppa Proppen</CornerLabel>
- */}      <CornerLabel pos="bl">© 2025</CornerLabel>
+      <CornerLabel pos="bl">© 2025</CornerLabel>
 
       <Navbar variant="default" logoHref="/" />
 
@@ -313,7 +312,7 @@ const ProfilPage = () => {
             <QuickSub>Dina dagliga mediciner</QuickSub>
           </QuickCard>
 
-          <QuickCard to="/symptomkoll" $delay="0.08s">
+          <QuickCard to="/" $delay="0.08s">
             <QuickIcon>
               <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
                 <path d="M2 9h2.5l2-5L9 14l2-6 1.5 1H16"
@@ -358,7 +357,7 @@ const ProfilPage = () => {
             <ActionArrow>›</ActionArrow>
           </ActionBtn>
 
-          <ActionBtn $delay="0.08s" onClick={() => {}}> {/* //will do later */}
+          <ActionBtn $delay="0.08s" onClick={() => {}}>
             <ActionIcon $color="rgba(125,255,212,0.08)" $iconColor={theme.colors.mint}>
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                 <rect x="3" y="7" width="10" height="7" rx="1.5" stroke="currentColor" strokeWidth="1.5"/>
@@ -375,7 +374,7 @@ const ProfilPage = () => {
         </ActionList>
 
         <SectionLabel>Farlig zon</SectionLabel>
-        <DeleteBtn onClick={() => {}}> {/* will do later */}
+        <DeleteBtn onClick={() => {}}>
           <ActionIcon $color="rgba(255,80,80,0.1)" $iconColor="rgba(255,120,120,0.9)">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
               <path d="M2 4h12M5 4V3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1M6 7v5M10 7v5M3 4l1 9a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1l1-9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>

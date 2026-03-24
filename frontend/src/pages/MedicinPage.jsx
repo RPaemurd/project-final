@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled, { keyframes, css } from 'styled-components';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Frame, Card, CornerLabel, fadeUp } from '../components/Layout.jsx';
+import { Frame, Card, fadeUp } from '../components/Layout.jsx';
 import Navbar from '../components/Navbar.jsx';
 import { theme } from '../styles/theme';
 import BottomNav from "../components/BottomNav.jsx"

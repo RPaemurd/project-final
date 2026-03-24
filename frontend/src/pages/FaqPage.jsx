@@ -312,8 +312,6 @@ const FaqItem = ({ question, answer, delay }) => {
 const FaqPage = () => (
   <Frame>
     <Card>
-      {/* <CornerLabel pos="tl">FAQ</CornerLabel> */}
-     {/*  <CornerLabel pos="tr">Stoppa Proppen</CornerLabel> */}
       <CornerLabel pos="bl">© 2025</CornerLabel>
 
       <Navbar variant="default" logoHref="/" />

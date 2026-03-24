@@ -31,33 +31,6 @@ const Hero = styled.div`
   }
 `;
 
-// Small pill badge at the top, e.g. "Beta — Now available"
-const Badge = styled.div`
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  background: rgba(0,0,0,0.3);
-  border: 1px solid rgba(255,255,255,0.25);
-  backdrop-filter: blur(10px);
-  border-radius: 100px;
-  padding: 0.35rem 1rem;
-  font-size: 0.8rem;
-  font-weight: 500;
-  color: rgba(255,255,255,0.9);
-  letter-spacing: 0.03em;
-  animation: ${fadeUp} 0.8s ease both;
-`;
-
-// The pulsing green dot in the badge
-const BadgeDot = styled.span`
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: ${theme.colors.mint};
-  box-shadow: 0 0 8px ${theme.colors.mint};
-  animation: ${pulse} 2s infinite;
-`;
-
 // Large heading
 // clamp() makes the size responsive without media queries:
 //   min 2.4rem, grows with screen width, max 5.2rem
@@ -262,8 +235,7 @@ const FloatMeta = styled.div`
 const LandingPage = () => (
   <Frame>
     <Card>
-{/*       <CornerLabel pos="bl">Stoppa Proppen ©</CornerLabel> 
- */}      <CornerLabel pos="br">2025</CornerLabel> 
+      <CornerLabel pos="br">2025</CornerLabel> 
 
       <Navbar variant="default" />
 

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { theme } from '../styles/theme';
-import { useLocation } from 'react-router-dom';
 import { useWindowSize } from "usehooks-ts";
 import useUserStore from '../store/userStore';
 
@@ -168,25 +167,7 @@ const MobileCta = styled.a`
   &:hover { background: #fff; }
 `;
 
-// Back button in the app variant — takes the user to the home page
-const BackBtn = styled.a`
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  font-size: 0.82rem;
-  font-weight: 400;
-  color: rgba(255,255,255,0.75);
-  text-decoration: none;
-  padding: 0.4rem 0.8rem;
-  border-radius: 100px;
-  border: 1px solid rgba(255,255,255,0.2);
-  transition: color 0.2s, border-color 0.2s;
-
-  &:hover { color: #fff; border-color: rgba(255,255,255,0.4); }
-  &:active { transform: scale(0.97); }
-`;
-
-// ─── User pill (app variant) ──────────────────────────────────
+// ─── User pill ────────────────────────────────────────────────
 const UserPill = styled.div`
   display: flex;
   align-items: center;
@@ -214,11 +195,10 @@ const Avatar = styled.div`
 `;
 
 // ─── Component ────────────────────────────────────────────────
-const Navbar = ({ variant = 'default', user = null, logoHref = '/' }) => {
+const Navbar = ({ variant = 'default', logoHref = '/' }) => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const toggleMenu = () => setMenuOpen(prev => !prev);
-  const closeMenu  = () => setMenuOpen(false);
 
   const { width } = useWindowSize();
   const isMobile = width < 768;
@@ -253,10 +233,6 @@ const Navbar = ({ variant = 'default', user = null, logoHref = '/' }) => {
         <NavCta href="/login">Kom igång</NavCta>
       )}
 
-     {/*  {!isLoggedIn && (
-      <MobileCta href="/login" onClick={() => setMenuOpen(false)}>Kom igång gratis</MobileCta>
-      )} */}
-
       {!isMobile && variant === 'default' && isLoggedIn && (
         <UserPill as="a" href="/profil" style={{ textDecoration: "none", cursor: "pointer"}}>
           <Avatar>👤</Avatar>
@@ -264,20 +240,6 @@ const Navbar = ({ variant = 'default', user = null, logoHref = '/' }) => {
         </UserPill>
       )}
 
-        {variant === 'app' && user && (
-          <> 
-           <BackBtn href="/">
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                <path d="M10 3L5 8l5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-              Tillbaka
-            </BackBtn>
-          <UserPill>
-            <Avatar>{user.initials}</Avatar>
-            {user.name}
-          </UserPill>
-          </>
-        )}
       </Nav>
 
        {isMobile && variant === 'default' && (
@@ -295,7 +257,7 @@ const Navbar = ({ variant = 'default', user = null, logoHref = '/' }) => {
           <MobileLink href="/" onClick={() => setMenuOpen(false)}>Hem</MobileLink>
           <MobileLink href="/profil" onClick={() => setMenuOpen(false)}>Min Profil</MobileLink>
           <MobileLink href="/oss" onClick={() => setMenuOpen(false)}>Om oss</MobileLink>
-          <MobileLink href="hurdetfungerar" onClick={() => setMenuOpen(false)}>Hur det fungerar</MobileLink>
+          <MobileLink href="/hurdetfungerar" onClick={() => setMenuOpen(false)}>Hur det fungerar</MobileLink>
           <MobileLink href="/faq" onClick={() => setMenuOpen(false)}>FAQ</MobileLink>
           <MobileLink href="/medicin" onClick={() => setMenuOpen(false)}>Medicinkoll</MobileLink>
           {!isLoggedIn && ( 

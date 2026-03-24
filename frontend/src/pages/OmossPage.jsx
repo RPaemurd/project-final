@@ -212,42 +212,6 @@ const TeamRole = styled.div`
   color: rgba(255,255,255,0.45);
 `;
 
-// ─── STATS ROW ────────────────────────────────────────────────
-const StatsRow = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0.8rem;
-  margin-bottom: 2.5rem;
-
-  @media (min-width: 600px) {
-    grid-template-columns: repeat(4, 1fr);
-  }
-`;
-
-const StatBox = styled.div`
-  background: rgba(0,0,0,0.2);
-  border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 14px;
-  padding: 1.2rem 1rem;
-  text-align: center;
-  animation: ${fadeUp} 0.6s ${({ $delay }) => $delay || '0s'} ease both;
-`;
-
-const StatNum = styled.div`
-  font-family: ${theme.fonts.serif};
-  font-size: 1.8rem;
-  font-weight: 300;
-  color: ${theme.colors.mint};
-  line-height: 1;
-  margin-bottom: 0.3rem;
-`;
-
-const StatLabel = styled.div`
-  font-size: 0.68rem;
-  color: rgba(255,255,255,0.45);
-  letter-spacing: 0.04em;
-`;
-
 // ─── CTA CARD ─────────────────────────────────────────────────
 const CtaCard = styled.div`
   background: rgba(125,255,212,0.07);
@@ -298,7 +262,6 @@ const CtaBtn = styled.a`
 const OmOssPage = () => (
   <Frame>
     <Card>
-     {/*  <CornerLabel pos="tl">Om oss</CornerLabel> */}
       <CornerLabel pos="bl">© 2025</CornerLabel>
 
       <Navbar variant="default" logoHref="/" />
@@ -319,27 +282,6 @@ const OmOssPage = () => (
             där ingen behöver känna sig ensam.
           </HeroText>
         </Hero>
-
-        {/* Statistik */}
-    {/*     <SectionLabel>Appen i siffror</SectionLabel>
-        <StatsRow>
-          <StatBox $delay="0s">
-            <StatNum>1 247</StatNum>
-            <StatLabel>Aktiva användare</StatLabel>
-          </StatBox>
-          <StatBox $delay="0.08s">
-            <StatNum>4.8</StatNum>
-            <StatLabel>Snittbetyg</StatLabel>
-          </StatBox>
-          <StatBox $delay="0.16s">
-            <StatNum>98%</StatNum>
-            <StatLabel>Nöjda användare</StatLabel>
-          </StatBox>
-          <StatBox $delay="0.24s">
-            <StatNum>0 kr</StatNum>
-            <StatLabel>Alltid gratis</StatLabel>
-          </StatBox>
-        </StatsRow> */}
 
         <Divider />
 
@@ -397,8 +339,7 @@ const OmOssPage = () => (
             komplement till den svenska vården — aldrig en ersättning.
           </BodyText>
           <BodyText>
-            {/* All medical information is reviewed and based on the National Board of Health's
-            and 1177's guidelines. */} Vi är alltid transparenta med vad appen kan
+            Vi är alltid transparenta med vad appen kan
             och inte kan — den ställer inga diagnoser.
           </BodyText>
         </TextSection>

@@ -289,8 +289,6 @@ const CtaBtn = styled.a`
 const HurDetFungerarPage = () => (
   <Frame>
     <Card>
-      {/* <CornerLabel pos="tl">Hur det fungerar</CornerLabel>
-      <CornerLabel pos="tr">Stoppa Proppen</CornerLabel> */}
       <CornerLabel pos="bl">© 2025</CornerLabel>
 
       <Navbar variant="default" logoHref="/" />

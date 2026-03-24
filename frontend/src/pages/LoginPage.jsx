@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { Frame, fadeUp, fadeLeft } from '../components/Layout.jsx';
 import { theme } from '../styles/theme';
 import useUserStore from '../store/userStore.js';
@@ -266,9 +266,28 @@ const SubmitBtn = styled.button`
   cursor: pointer;
   transition: background 0.2s, transform 0.15s;
   box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
 
-  &:hover { background: #fff; transform: translateY(-1px); }
-  &:active { transform: scale(0.98); }
+  &:hover:not(:disabled) { background: #fff; transform: translateY(-1px); }
+  &:active:not(:disabled) { transform: scale(0.98); }
+  &:disabled { opacity: 0.7; cursor: not-allowed; }
+`;
+
+const spin = keyframes`
+  to { transform: rotate(360deg); }
+`;
+
+const Spinner = styled.span`
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid ${theme.colors.tealMid};
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: ${spin} 0.7s linear infinite;
 `;
 
 const Divider = styled.div`
@@ -344,35 +363,28 @@ const CornerLabel = styled.span`
   }
 `;
 
-/* const LoginFrame = styled(Frame)`
-  @media (min-width: 768px) {
-    margin-top: 1rem; 
-  }
-`; */
 // ─── Page ─────────────────────────────────────────────────────
-const LoginPage = ({ onLogin }) => {
+const LoginPage = () => {
   const [email, setEmail]       = useState('');
   const [password, setPassword] = useState('');
 
   const [isLogin, setIsLogin] = useState(true);
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
   const login = useUserStore(state => state.login);
-  const isLoggedIn = useUserStore(state => state.isLoggedIn);
-   /*  console.log('isLoggedIn:', isLoggedIn) */
 
-
-/*   const [confirmPassword, setconfirmPassword] = useState('')
- */
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    setError('');
 
     const response = await fetch(`${BASE_URL}/api/login`, {
-    
-      method: "POST", 
+
+      method: "POST",
       headers: {
-        "Content-Type": "application/json" //we sending json 
+        "Content-Type": "application/json" //we sending json
       },
       body: JSON.stringify({
         email: email,
@@ -387,11 +399,14 @@ const LoginPage = ({ onLogin }) => {
       navigate('/profil');
     } else {
       setError(data.message)
+      setLoading(false);
     }
   };
 
   const handleRegister = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    setError('');
 
     const response = await fetch(`${BASE_URL}/api/register`, {
 
@@ -408,9 +423,11 @@ const LoginPage = ({ onLogin }) => {
     const data = await response.json()
 
     if (response.ok){
+      setLoading(false);
       setIsLogin(true);
     } else {
       setError(data.message)
+      setLoading(false);
     }
   }
 
@@ -424,8 +441,6 @@ const LoginPage = ({ onLogin }) => {
                 stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
           </svg>
         </CloseBtn>
-        {/* <CornerLabel pos="tl">Inloggning</CornerLabel>
-        <CornerLabel pos="tr">Stoppa Proppen</CornerLabel> */}
         <CornerLabel pos="bl">Säker anslutning</CornerLabel>
         <CornerLabel pos="br">v0.1</CornerLabel>
 
@@ -482,7 +497,9 @@ const LoginPage = ({ onLogin }) => {
               <ForgotLink href="/glömt-lösenord">Glömt lösenordet?</ForgotLink>
             </ForgotRow>
             {error && <p style={{ color: 'red' }}>{error}</p>}
-            <SubmitBtn type="submit">Logga in</SubmitBtn>
+            <SubmitBtn type="submit" disabled={loading}>
+              {loading ? <><Spinner />Laddar...</> : 'Logga in'}
+            </SubmitBtn>
           </form>
 
           <Divider>
@@ -517,7 +534,9 @@ const LoginPage = ({ onLogin }) => {
               Har du redan ett lösenord? <button onClick={() => setIsLogin(true)}>Logga in här</button>
             </RegisterLink>
             {error && <p style={{ color: 'red' }}>{error}</p>}
-            <SubmitBtn type="submit">Registrera</SubmitBtn>
+            <SubmitBtn type="submit" disabled={loading}>
+              {loading ? <><Spinner />Laddar...</> : 'Registrera'}
+            </SubmitBtn>
           </form>
           </>
           )}
