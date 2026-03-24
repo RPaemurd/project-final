@@ -5,13 +5,17 @@ const useUserStore = create(
     persist(
         (set) => ({
 
-        user: null, //no user from the beginning
-        isLoggedIn: false, //not loged in from the start
-            
-        //function to log in
-        login: (userData) => set({ user: userData, isLoggedIn: true }),
+        user: null,
+        accessToken: null,
+        isLoggedIn: false,
 
-        logout: () => set({ user: null, isLoggedIn: false })
+        login: (userData) => set({
+            user: { email: userData.email, id: userData.id },
+            accessToken: userData.accessToken,
+            isLoggedIn: true
+        }),
+
+        logout: () => set({ user: null, accessToken: null, isLoggedIn: false })
         }),
         { name: "user-store" }
     )

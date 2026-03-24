@@ -3,7 +3,6 @@ import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from 'dotenv';
 import authRoutes from "./routes/auth";
-import session from 'express-session';
 
 dotenv.config();
 
@@ -15,16 +14,6 @@ const app = express();
 /* Middleware */
 app.use(cors());
 app.use(express.json());
-
-// Session management
-// secret: a secret key that encrypts the session
-// resave: do not save the session if nothing has changed
-// saveUninitialized: do not save empty sessions
- app.use(session({
-  secret: process.env.SESSION_SECRET || 'secret-key',
-  resave: false,
-  saveUninitialized: false,
-})); 
 
 // tells express that all routes in auth.js should start with /api
 // register becomes /api/register

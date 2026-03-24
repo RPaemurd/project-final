@@ -1,5 +1,5 @@
-import express from "express"
-7import User from "../models/User.js" // we need this to save and retrieve users in MongoDB
+import express from "express";
+import User from "../models/User.js";
 import bcrypt from "bcrypt";
 
 const router = express.Router();
