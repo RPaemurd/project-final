@@ -1,6 +1,7 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
-import { Frame, Card, CornerLabel, fadeUp, fadeLeft, pulse } from '../components/Layout.jsx';
+import { Link } from 'react-router-dom';
+import { Frame, Card, CornerLabel, fadeUp, fadeLeft } from '../components/Layout.jsx';
 import Navbar from '../components/Navbar.jsx';
 import { theme } from '../styles/theme';
 
@@ -79,7 +80,7 @@ const HeroActions = styled.div`
 `;
 
 // Subtle ghost link, e.g. "Read more →"
-const BtnGhostLink = styled.a`
+const BtnGhostLink = styled(Link)`
   font-size: 0.85rem;
   font-weight: 400;
   color: rgba(255,255,255,0.88);
@@ -251,7 +252,7 @@ const LandingPage = () => (
         </HeroSub>
 
         <HeroActions>
-          <BtnGhostLink href="/hur-det-fungerar">
+          <BtnGhostLink to="/hurdetfungerar">
             Läs mer <ArrowIcon />
           </BtnGhostLink>
         </HeroActions>

@@ -10,6 +10,7 @@
 
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import { theme } from '../styles/theme';
 
 // ─── Wrapper ──────────────────────────────────────────────────────────────────
@@ -41,7 +42,7 @@ const Bar = styled.nav`
 
 // ─── Individual nav button ────────────────────────────────────────────────────
 // $active controls whether the button is highlighted (light green) or not (grey).
-const NavItem = styled.a`
+const NavItem = styled(Link)`
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -80,7 +81,7 @@ const BottomNav = ({ active = '' }) => (
   <Bar>
 
     {/* Hem */}
-    <NavItem href="/" $active={active === 'hem'}>
+    <NavItem to="/" $active={active === 'hem'}>
       <Icon>
         <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
           <path d="M3 9.5L11 3l8 6.5V19a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5Z"
@@ -92,7 +93,7 @@ const BottomNav = ({ active = '' }) => (
     </NavItem>
 
     {/* Medicinlåda */}
-    <NavItem href="/medicin" $active={active === 'medicin'}>
+    <NavItem to="/medicin" $active={active === 'medicin'}>
       <Icon>
         <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
           <path d="M9 3.5a4.5 4.5 0 0 0-6.364 6.364l9 9A4.5 4.5 0 0 0 18 12.636L9 3.5Z"
@@ -104,7 +105,7 @@ const BottomNav = ({ active = '' }) => (
     </NavItem>
 
     {/* Symtomkoll */}
-    <NavItem href="/symptomkoll" $active={active === 'symptomkoll'}>
+    <NavItem to="/symptomkoll" $active={active === 'symptomkoll'}>
       <Icon>
         <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
           <path d="M2 11h3l2-7 4 14 3-9 2 2h4"

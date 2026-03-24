@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import { theme } from '../styles/theme';
 import { useWindowSize } from "usehooks-ts";
 import useUserStore from '../store/userStore';
@@ -18,7 +19,7 @@ const Nav = styled.nav`
   }
 `;
 
-const LogoWrap = styled.a`
+const LogoWrap = styled(Link)`
   display: flex;
   align-items: center;
   gap: 0.6rem;
@@ -55,7 +56,7 @@ const NavLinks = styled.ul`
   }
 `;
 
-const NavLink = styled.a`
+const NavLink = styled(Link)`
   font-size: 0.85rem;
   font-weight: 400;
   color: rgba(255,255,255,0.88);
@@ -64,7 +65,7 @@ const NavLink = styled.a`
   &:hover { color: #fff; }
 `;
 
-const NavCta = styled.a`
+const NavCta = styled(Link)`
   display: none;
 
   @media (min-width: 768px) {
@@ -143,7 +144,7 @@ const MobileMenu = styled.div`
   }
 `;
 
-const MobileLink = styled.a`
+const MobileLink = styled(Link)`
   font-family: ${theme.fonts.serif};
   font-size: 2rem;
   font-weight: 300;
@@ -154,7 +155,7 @@ const MobileLink = styled.a`
   &:hover { color: #fff; }
 `;
 
-const MobileCta = styled.a`
+const MobileCta = styled(Link)`
   margin-top: 1.5rem;
   font-size: 0.9rem;
   font-weight: 500;
@@ -209,7 +210,7 @@ const Navbar = ({ variant = 'default', logoHref = '/' }) => {
   return (
     <>
       <Nav>
-        <LogoWrap href={logoHref}>
+        <LogoWrap to={logoHref}>
           <LogoIcon>
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
               <path d="M2 8h2l1.5-4L8 12l1.5-5L11 8h3" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
@@ -221,20 +222,20 @@ const Navbar = ({ variant = 'default', logoHref = '/' }) => {
         {/* if its not mobile, show navlinks */}
       {!isMobile && variant === 'default' && (
         <NavLinks>
-          <li><NavLink href="/">Hem</NavLink></li>
-          <li><NavLink href="/medicin">Medicinkoll</NavLink></li>
-          <li><NavLink href="/oss">Om oss</NavLink></li>
-          <li><NavLink href="/hurdetfungerar">Hur det fungerar</NavLink></li>
-          <li><NavLink href="/faq">FAQ</NavLink></li>
+          <li><NavLink to="/">Hem</NavLink></li>
+          <li><NavLink to="/medicin">Medicinkoll</NavLink></li>
+          <li><NavLink to="/oss">Om oss</NavLink></li>
+          <li><NavLink to="/hurdetfungerar">Hur det fungerar</NavLink></li>
+          <li><NavLink to="/faq">FAQ</NavLink></li>
         </NavLinks>
       )}
 
       {!isMobile && variant === 'default' && !isLoggedIn && (
-        <NavCta href="/login">Kom igång</NavCta>
+        <NavCta to="/login">Kom igång</NavCta>
       )}
 
       {!isMobile && variant === 'default' && isLoggedIn && (
-        <UserPill as="a" href="/profil" style={{ textDecoration: "none", cursor: "pointer"}}>
+        <UserPill as={Link} to="/profil" style={{ textDecoration: "none", cursor: "pointer"}}>
           <Avatar>👤</Avatar>
           {storeUser?.email}
         </UserPill>
@@ -254,14 +255,14 @@ const Navbar = ({ variant = 'default', logoHref = '/' }) => {
       {/* Mobile drawer */}
       {isMobile && variant === 'default' && (
         <MobileMenu $open={menuOpen}>
-          <MobileLink href="/" onClick={() => setMenuOpen(false)}>Hem</MobileLink>
-          <MobileLink href="/profil" onClick={() => setMenuOpen(false)}>Min Profil</MobileLink>
-          <MobileLink href="/oss" onClick={() => setMenuOpen(false)}>Om oss</MobileLink>
-          <MobileLink href="/hurdetfungerar" onClick={() => setMenuOpen(false)}>Hur det fungerar</MobileLink>
-          <MobileLink href="/faq" onClick={() => setMenuOpen(false)}>FAQ</MobileLink>
-          <MobileLink href="/medicin" onClick={() => setMenuOpen(false)}>Medicinkoll</MobileLink>
-          {!isLoggedIn && ( 
-          <MobileCta href="/login" onClick={() => setMenuOpen(false)}>Kom igång gratis</MobileCta>
+          <MobileLink to="/" onClick={() => setMenuOpen(false)}>Hem</MobileLink>
+          <MobileLink to="/profil" onClick={() => setMenuOpen(false)}>Min Profil</MobileLink>
+          <MobileLink to="/oss" onClick={() => setMenuOpen(false)}>Om oss</MobileLink>
+          <MobileLink to="/hurdetfungerar" onClick={() => setMenuOpen(false)}>Hur det fungerar</MobileLink>
+          <MobileLink to="/faq" onClick={() => setMenuOpen(false)}>FAQ</MobileLink>
+          <MobileLink to="/medicin" onClick={() => setMenuOpen(false)}>Medicinkoll</MobileLink>
+          {!isLoggedIn && (
+          <MobileCta to="/login" onClick={() => setMenuOpen(false)}>Kom igång gratis</MobileCta>
           )}
         </MobileMenu>
       )}

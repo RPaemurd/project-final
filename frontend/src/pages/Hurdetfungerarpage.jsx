@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import { Frame, Card, CornerLabel, fadeUp } from '../components/Layout.jsx';
 import Navbar from '../components/Navbar.jsx';
 import { theme } from '../styles/theme';
@@ -265,7 +266,7 @@ const CtaText = styled.p`
   line-height: 1.7;
 `;
 
-const CtaBtn = styled.a`
+const CtaBtn = styled(Link)`
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
@@ -435,7 +436,7 @@ const HurDetFungerarPage = () => (
             Skapa ett gratis konto och kom igång direkt.
             Det tar mindre än en minut.
           </CtaText>
-          <CtaBtn href="/login">Kom igång gratis →</CtaBtn>
+          <CtaBtn to="/login">Kom igång gratis →</CtaBtn>
         </CtaCard>
 
       </ScrollArea>

@@ -3,7 +3,7 @@ import styled, { keyframes } from 'styled-components';
 import { Frame, fadeUp, fadeLeft } from '../components/Layout.jsx';
 import { theme } from '../styles/theme';
 import useUserStore from '../store/userStore.js';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8081'; //if the production doesnt work, use an env variabel
 
@@ -70,7 +70,7 @@ const LeftInner = styled.div`
   z-index: 5;
 `;
 
-const LogoWrap = styled.a`
+const LogoWrap = styled(Link)`
   display: flex;
   align-items: center;
   gap: 0.6rem;
@@ -155,7 +155,7 @@ const RightPanel = styled.div`
   }
 `;
 
-const CloseBtn = styled.a`
+const CloseBtn = styled(Link)`
   position: absolute;
   top: 1.2rem;
   right: 1.2rem;
@@ -246,7 +246,7 @@ const ForgotRow = styled.div`
   margin-bottom: 1rem;
 `;
 
-const ForgotLink = styled.a`
+const ForgotLink = styled(Link)`
   font-size: 0.75rem;
   color: rgba(255,255,255,0.6);
   text-decoration: none;
@@ -435,7 +435,7 @@ const LoginPage = () => {
     <Frame>
       
       <SplitCard>
-        <CloseBtn href="/" aria-label="Stäng och gå tillbaka">
+        <CloseBtn to="/" aria-label="Stäng och gå tillbaka">
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
             <path d="M2 2l10 10M12 2L2 12"
                 stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
@@ -446,7 +446,7 @@ const LoginPage = () => {
 
         {/* Left — desktop only */}
         <LeftPanel>
-          <LogoWrap href="/">
+          <LogoWrap to="/">
             <LogoIcon>
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                 <path d="M2 8h2l1.5-4L8 12l1.5-5L11 8h3" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
@@ -494,7 +494,7 @@ const LoginPage = () => {
                 value={password} onChange={e => setPassword(e.target.value)} required />
             </FormGroup>
             <ForgotRow>
-              <ForgotLink href="/glömt-lösenord">Glömt lösenordet?</ForgotLink>
+              <ForgotLink to="/glömt-lösenord">Glömt lösenordet?</ForgotLink>
             </ForgotRow>
             {error && <p style={{ color: 'red' }}>{error}</p>}
             <SubmitBtn type="submit" disabled={loading}>
